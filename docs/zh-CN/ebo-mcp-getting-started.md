@@ -25,15 +25,11 @@ EBO 机器人现在支持 MCP（AI 控制接口）。简单说，你可以用 AI
 
 ## 第二步：选择一个 AI 助手
 
-目前支持 MCP 的主流 AI 助手有：
+支持 MCP 的 AI Agent 很多，**实测可用**的有：豆包、WorkBuddy、千问、CodeX 等。此外 Claude Desktop、ChatGPT Desktop、Cursor 等主流工具也支持 MCP。
 
-| AI 助手 | 说明 | 下载 |
-| --- | --- | --- |
-| Claude Desktop（推荐新手） | 免费，界面友好，MCP 配置简单 | claude.ai |
-| ChatGPT Desktop | 需要 Plus 或 Pro 订阅 | openai.com |
-| Cursor | 适合有编程基础的用户，是一个 AI 编程编辑器 | cursor.com |
+需要提醒的是：**每个 Agent 的 MCP 配置入口和流程都不一样**，照抄某一种教程的步骤往往行不通。最省事的做法是——**把你的 MCP 令牌直接发给 Agent，让它引导你完成配置**，Agent 会按自己的界面给出对应操作步骤。
 
-下面以 Claude Desktop 为例演示配置过程，其他工具的配置方式类似。
+下面仍以 Claude Desktop 为例演示一种典型配置过程，供参考。
 
 ## 第三步：配置 MCP 连接
 

@@ -25,15 +25,11 @@ For example, say "go check the living room" to your AI, and it will automaticall
 
 ## Step 2: Choose an AI assistant
 
-Mainstream AI assistants that support MCP:
+Many AI Agents support MCP. **Tested and working** ones include Doubao, WorkBuddy, Qwen, and CodeX. Claude Desktop, ChatGPT Desktop, Cursor, and other mainstream tools also support MCP.
 
-| AI Assistant | Notes | Download |
-| --- | --- | --- |
-| Claude Desktop (recommended for beginners) | Free, friendly UI, simple MCP setup | claude.ai |
-| ChatGPT Desktop | Requires a Plus or Pro subscription | openai.com |
-| Cursor | An AI code editor for users with programming experience | cursor.com |
+Note that **every Agent has a different MCP configuration entry point and workflow** — copying one tool's steps usually won't work for another. The easiest approach is to **send your MCP token directly to the Agent and let it guide you through the setup**; it will give you steps tailored to its own interface.
 
-The following uses Claude Desktop as an example; other tools are configured similarly.
+The following uses Claude Desktop as one example of a typical configuration.
 
 ## Step 3: Configure the MCP connection
 

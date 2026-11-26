@@ -17,7 +17,8 @@
 
 ### 进阶
 
-- **[EBO MCP 排错与最佳实践](docs/zh-CN/ebo-mcp-troubleshooting.md)** — 配置踩坑、连接排查、顺序执行多动作、动作失败现场排查、多机器人与安全
+- **[EBO MCP 排错与最佳实践](docs/zh-CN/ebo-mcp-troubleshooting.md)** — 配置踩坑、连接排查、顺序执行与状态轮询、动作失败现场排查、跟随停止坑、多机器人、音视频边界
+- **[EBO MCP 工具参考](docs/zh-CN/ebo-mcp-tools-reference.md)** — 全部 15 个工具的用途、参数表与调用约定（状态、导航、移动、跟随、语音、音乐、拍摄）
 
 ### 更多教程（整理中）
 

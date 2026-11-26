@@ -17,7 +17,8 @@ Bilingual (Chinese / English) tutorials and examples for [MCP (Model Context Pro
 
 ### Going Further
 
-- **[EBO MCP Troubleshooting and Best Practices](docs/en-US/ebo-mcp-troubleshooting.md)** — config pitfalls, connection checks, sequential actions, on-site failure diagnosis, multiple robots, and security
+- **[EBO MCP Troubleshooting and Best Practices](docs/en-US/ebo-mcp-troubleshooting.md)** — config pitfalls, connection checks, sequential execution with status polling, on-site failure diagnosis, the follow-mode pitfall, multiple robots, and A/V limits
+- **[EBO MCP Tool Reference](docs/en-US/ebo-mcp-tools-reference.md)** — all 15 tools with purposes, parameter tables, and calling conventions (status, navigation, movement, follow, voice, music, capture)
 
 ### More Tutorials (in progress)
 
