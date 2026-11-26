@@ -1,6 +1,6 @@
 # Project 2: Smart Home Integration (Door Welcome)
 
-> Connects an EBO robot to Mijia devices through two MCP channels: HTTP transport controls the robot, stdio transport integrates local devices. It also records how a long-running daemon handles stale state, dirty data, and imperfect hardware.
+> Connects an EBO robot to Mijia devices through two MCP channels: HTTP transport controls the robot, stdio transport integrates local devices. It also records how a long-running daemon handles stale state, dirty data, and imperfect hardware. Tested on the EBO MAX.
 
 ## Final Result
 

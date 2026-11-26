@@ -2,7 +2,7 @@
 
 > The third project wires EBO into a voice pipeline: wake word → TTS acknowledgement → listen for a command → ASR transcription → the WorkBuddy Agent interprets it → TTS reply.
 >
-> Based on hands-on work and testing between 2026-11-24 and 11-26. It records what worked, what didn't, and why.
+> Based on hands-on work and testing between 2026-11-24 and 11-26. It records what worked, what didn't, and why. Tested on the EBO MAX.
 
 ## Current Status
 

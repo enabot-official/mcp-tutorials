@@ -4,6 +4,8 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 > Official MCP tutorials for Enabot EBO robots: from basic concepts to three complete projects, with runnable companion code. All screenshots and code are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
 
+> Supported models: MCP is available on the EBO MAX and EBO Air2 Plus only. All three projects in this repository were tested on the EBO MAX.
+
 ## Language
 
 - 中文 ([README.md](README.md))

@@ -8,7 +8,7 @@ EBO 机器人现在支持 MCP（AI 控制接口）。你可以用 AI 助手（�
 
 ## 你需要准备什么
 
-- 一台 EBO 机器人（EBO MAX 或 EBO Air2 Plus 均可）
+- 一台 EBO 机器人。目前仅 EBO MAX 和 EBO Air2 Plus 两款支持 MCP，其余机型暂不支持。本教程及配套项目均以 EBO MAX 实测。
 - 机器人已开机、连上 WiFi，并在「一宝机器人」APP 中完成绑定
 - 一个支持 MCP 的 AI Agent（下面会推荐几个）
 

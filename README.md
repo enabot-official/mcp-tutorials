@@ -4,6 +4,8 @@
 
 > 面向 Enabot EBO 机器人的官方 MCP 教程：从基础概念到三个完整实战项目，配套代码可直接运行。所有截图与代码均已脱敏，不含真实令牌、接口地址、设备号或内网 IP。
 
+> 支持机型：目前仅 EBO MAX 与 EBO Air2 Plus 支持 MCP。本库三个实战项目均以 EBO MAX 实测。
+
 ## 语言
 
 - [English](README_EN.md)

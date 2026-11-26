@@ -1,6 +1,6 @@
 # Project 1: Morning Schedule Briefing
 
-> A project that runs daily at 08:00, focused on making a robot execute multiple actions reliably in order. The issues listed here were found during testing on real hardware.
+> A project that runs daily at 08:00, focused on making a robot execute multiple actions reliably in order. The issues listed here were found during testing on real hardware, tested on the EBO MAX.
 >
 > This is not conventional software engineering: the business logic lives in the scheduled task's Prompt, and the script only wraps robot calls into one-line commands.
 

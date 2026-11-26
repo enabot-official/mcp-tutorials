@@ -8,7 +8,7 @@ For example, say "go check the living room" to your AI, and it will automaticall
 
 ## What you'll need
 
-- An EBO robot (EBO MAX or EBO Air2 Plus)
+- An EBO robot. Only the EBO MAX and EBO Air2 Plus support MCP at present; other models are not supported yet. This guide and the companion projects were all tested on the EBO MAX.
 - The robot powered on, connected to WiFi, and bound in the "Yibao Robot" app
 - An AI Agent that supports MCP (recommendations below)
 
