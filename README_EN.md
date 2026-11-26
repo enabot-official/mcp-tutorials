@@ -2,7 +2,7 @@
 
 Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) on Enabot EBO robots.
 
-> Complete first version — from zero basics to two full real-world projects. All screenshots are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
+> Complete first version — from zero basics to three full real-world projects. All screenshots are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
 
 ## Language
 
@@ -32,8 +32,9 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 9. **[Project 1: Morning Schedule Briefing](docs/en-US/project-01-morning-briefing.md)** — runs daily at 08:00: five-step SOP, state-verification polling, wake-up loop, 9 pitfalls, evolution history
 10. **[Project 2: Smart Home Integration (Door Welcome)](docs/en-US/project-02-smart-home.md)** — EBO + Mijia dual MCP channels: 8-step flow, name tri-state, core code, 13 pitfalls, config parameter table
+11. **[Project 3: Turning EBO into a Voice Assistant](docs/en-US/project-03-voice-assistant.md)** — RTSP audio + ASR + Agent bridge: three implementation stages, wake-word phonetic matching, audio/environment pitfalls, and the real reason the E2E loop is still blocked
 
-> Both projects come from real, live-running systems — complete cases for taking MCP from "it works" to "it runs stably long-term".
+> All three projects come from real, live-running systems — complete cases for taking MCP from "it works" to "it runs stably long-term". Project 3 also honestly documents what is not yet working and why.
 
 ## Layout
 
@@ -41,10 +42,10 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 mcp-tutorials/
 ├── README.md / README_EN.md      # Chinese / English entry + learning path
 ├── docs/
-│   ├── zh-CN/ / en-US/           # 10 articles each, standalone
+│   ├── zh-CN/ / en-US/           # 11 articles each, standalone
 │   │   ├── 01~04                 # basics and control demo
 │   │   ├── ebo-mcp-*             # getting started / tools / troubleshooting / prompts
-│   │   └── project-01/02         # two real-world projects
+│   │   └── project-01/02/03      # three real-world projects
 ├── assets/                       # 8 bilingual screenshots (redacted)
 ├── examples/                     # Runnable example code
 └── LICENSE
