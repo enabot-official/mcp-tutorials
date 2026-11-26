@@ -15,6 +15,10 @@
 
 - **[EBO 机器人 MCP 入门教程](docs/zh-CN/ebo-mcp-getting-started.md)** — 从获取令牌到用大白话指挥机器人，含 Claude Desktop 配置、指令示例、机型对比与常见问题
 
+### 进阶
+
+- **[EBO MCP 排错与最佳实践](docs/zh-CN/ebo-mcp-troubleshooting.md)** — 配置踩坑、连接排查、顺序执行多动作、动作失败现场排查、多机器人与安全
+
 ### 更多教程（整理中）
 
 1. [MCP 是什么](docs/zh-CN/01-mcp-intro.md) — 协议背景、核心概念、适用场景

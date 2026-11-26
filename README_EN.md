@@ -15,6 +15,10 @@ Bilingual (Chinese / English) tutorials and examples for [MCP (Model Context Pro
 
 - **[EBO Robot MCP Getting Started](docs/en-US/ebo-mcp-getting-started.md)** — from getting your token to controlling your robot in plain language, including Claude Desktop setup, example commands, model comparison, and FAQ
 
+### Going Further
+
+- **[EBO MCP Troubleshooting and Best Practices](docs/en-US/ebo-mcp-troubleshooting.md)** — config pitfalls, connection checks, sequential actions, on-site failure diagnosis, multiple robots, and security
+
 ### More Tutorials (in progress)
 
 1. [What is MCP](docs/en-US/01-mcp-intro.md) — background, core concepts, use cases
