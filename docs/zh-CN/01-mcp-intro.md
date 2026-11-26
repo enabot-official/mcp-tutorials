@@ -28,7 +28,7 @@ MCP（Model Context Protocol，模型上下文协议）就是为解决这个 N×
   └───────────────┘       └──────────┘       └──────────┘       └─────────┘
 ```
 
-- Host（宿主）：用户直接打交道的 AI 应用，如 WorkBuddy、Claude Desktop。它理解你的自然语言，决定调用哪些工具
+- Host（宿主）：用户直接打交道的 AI 应用，如 WorkBuddy、豆包。它理解你的自然语言，决定调用哪些工具
 - Client（客户端）：Host 内部的协议组件，负责与 Server 建立连接、收发消息
 - Server（服务端）：把外部系统的能力按 MCP 规范暴露出来。EBO 的 Server 暴露了 15 个工具（见[工具参考](ebo-mcp-tools-reference.md)）
 

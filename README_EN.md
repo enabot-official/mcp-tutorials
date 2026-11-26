@@ -15,7 +15,7 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 ### ① Getting Started
 
-1. [EBO Robot MCP Getting Started](docs/en-US/ebo-mcp-getting-started.md) — from token to natural-language control: Claude Desktop setup, example commands, model comparison, FAQ (with screenshots)
+1. [EBO Robot MCP Getting Started](docs/en-US/ebo-mcp-getting-started.md) — from token to natural-language control: WorkBuddy setup, example commands, model comparison, FAQ (with screenshots)
 2. [Quickstart: Your First Command in 5 Minutes](docs/en-US/02-quickstart.md) — condensed version for a first successful call
 3. [What is MCP](docs/en-US/01-mcp-intro.md) — protocol background, architecture, can/cannot
 

@@ -22,7 +22,7 @@
 
 推荐方式：把令牌直接发给你的 AI Agent（豆包 / WorkBuddy / 千问 / CodeX 均可），说"帮我配置这个 MCP"，让它按自己的界面引导你。每个 Agent 的配置入口不同，照抄别人的步骤往往行不通。
 
-如果你想手动配，Claude Desktop 的配置文件写法如下（替换两处占位符）：
+如果你想手动配，WorkBuddy 的 MCP 配置文件在 `~/.workbuddy/mcp.json`，写法如下（替换两处占位符）：
 
 ```json
 {

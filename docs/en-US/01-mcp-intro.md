@@ -26,7 +26,7 @@ For our scenario, this means: once the EBO robot provides an MCP interface, any 
   └───────────────┘       └──────────┘       └──────────┘       └─────────┘
 ```
 
-- Host: the AI app you interact with — WorkBuddy, Claude Desktop. It understands your natural language and decides which tools to call
+- Host: the AI app you interact with — WorkBuddy, Doubao. It understands your natural language and decides which tools to call
 - Client: the protocol component inside the Host, managing the connection and message exchange with the Server
 - Server: exposes an external system's capabilities per the MCP spec. EBO's Server exposes 15 tools (see [Tool Reference](ebo-mcp-tools-reference.md))
 

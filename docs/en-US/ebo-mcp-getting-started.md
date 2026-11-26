@@ -31,11 +31,11 @@ Many AI Agents support MCP. Tested and working ones include Doubao, WorkBuddy, Q
 
 Note that every Agent has a different MCP configuration entry point and workflow — copying one tool's steps usually won't work for another. The easiest approach is to send your MCP token directly to the Agent and let it guide you through the setup; it will give you steps tailored to its own interface.
 
-The following uses Claude Desktop as one example of a typical configuration.
+This guide and all three companion projects were built with WorkBuddy, so the configuration example below uses WorkBuddy too.
 
 ## Step 3: Configure the MCP connection
 
-1. Open Claude Desktop and click the menu in the top-left → Settings → Developer → Edit Config
+1. Open WorkBuddy's MCP config file at `~/.workbuddy/mcp.json` (create it if it doesn't exist)
 2. Add the following to the config file, replacing two placeholders:
    - `<YOUR_TOKEN>`: the token you copied from the app
    - `<EBO_MAX_MCP_ENDPOINT>` / `<EBO_PLUS_MCP_ENDPOINT>`: the MCP endpoint for your robot. Check the AI Linked Programming page in the "Yibao Robot" app or ask official support for the address. This tutorial does not publish the concrete endpoints.
@@ -72,8 +72,8 @@ For EBO Air2 Plus:
 }
 ```
 
-3. Save the file and restart Claude Desktop
-4. You'll see an MCP connection icon at the bottom of the chat box — the connection is successful (the image below shows WorkBuddy with 15/15 tools enabled)
+3. Save the file and restart WorkBuddy
+4. You'll see an MCP connection icon at the bottom of the chat box — the connection is successful (15/15 tools enabled)
 
 ![MCP service connected, 15/15 tools enabled](../../assets/mcp-connected-EN.png)
 

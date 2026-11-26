@@ -29,14 +29,14 @@ EBO 机器人现在支持 MCP（AI 控制接口）。你可以用 AI 助手（�
 
 支持 MCP 的 AI Agent 很多，实测可用的有：豆包、WorkBuddy、千问、CodeX 等。此外 Claude Desktop、ChatGPT Desktop、Cursor 等主流工具也支持 MCP。
 
-需要提醒的是：每个 Agent 的 MCP 配置入口和流程都不一样，照抄某一种教程的步骤往往行不通。最省事的做法是——把你的 MCP 令牌直接发给 Agent，让它引导你完成配置，Agent 会按自己的界面给出对应操作步骤。
+本教程和配套的三个实战项目均使用 WorkBuddy 完成，下面的配置案例也以 WorkBuddy 为例。
 
-下面仍以 Claude Desktop 为例演示一种典型配置过程，供参考。
+需要提醒的是：每个 Agent 的 MCP 配置入口和流程都不一样，照抄某一种教程的步骤往往行不通。最省事的做法是——把你的 MCP 令牌直接发给 Agent，让它引导你完成配置，Agent 会按自己的界面给出对应操作步骤。
 
 ## 第三步：配置 MCP 连接
 
-1. 打开 Claude Desktop，点击左上角菜单 → Settings → Developer → Edit Config
-2. 在打开的配置文件中添加以下内容，注意替换两处占位符：
+1. 打开 WorkBuddy 的 MCP 配置文件 `~/.workbuddy/mcp.json`（不存在就新建一个）
+2. 在配置文件中添加以下内容，注意替换两处占位符：
    - `<YOUR_TOKEN>`：替换为你在 APP 中复制的令牌
    - `<EBO_MAX_MCP_ENDPOINT>` / `<EBO_PLUS_MCP_ENDPOINT>`：替换为你的机器人对应的 MCP 接入地址。具体地址请在「一宝机器人」APP 的「AI 联动编程」页面查看，或向官方获取，本教程不公开具体地址。
 
@@ -72,8 +72,8 @@ EBO Air2 Plus 用户：
 }
 ```
 
-3. 保存文件，重启 Claude Desktop
-4. 你会在对话框底部看到一个 MCP 连接图标，说明连接成功（下图为 WorkBuddy 中的效果，显示 15/15 个工具已启用）
+3. 保存文件，重启 WorkBuddy
+4. 你会在对话框底部看到一个 MCP 连接图标，说明连接成功（下图显示 15/15 个工具已启用）
 
 ![MCP 服务连接成功，15/15 个工具已启用](../../assets/mcp-connected-CN.png)
 

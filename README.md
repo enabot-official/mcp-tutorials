@@ -15,7 +15,7 @@
 
 ### ① 入门
 
-1. [EBO 机器人 MCP 入门教程](docs/zh-CN/ebo-mcp-getting-started.md) — 从获取令牌到用自然语言指挥机器人：Claude Desktop 配置、指令示例、机型对比、FAQ（含截图）
+1. [EBO 机器人 MCP 入门教程](docs/zh-CN/ebo-mcp-getting-started.md) — 从获取令牌到用自然语言指挥机器人：WorkBuddy 配置、指令示例、机型对比、FAQ（含截图）
 2. [快速开始：5 分钟发出第一条指令](docs/zh-CN/02-quickstart.md) — 精简版，快速完成第一次调用
 3. [MCP 是什么](docs/zh-CN/01-mcp-intro.md) — 协议背景、架构、能与不能
 

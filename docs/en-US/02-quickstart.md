@@ -22,7 +22,7 @@ Open the "Yibao Robot" app → robot settings → "AI Linked Programming", copy 
 
 Easiest way: send the token directly to your AI Agent (Doubao / WorkBuddy / Qwen / CodeX all work) and say "help me configure this MCP" — it will guide you through its own interface. Every Agent has a different config entry; copying someone else's steps often fails.
 
-For manual setup, Claude Desktop's config looks like this (replace both placeholders):
+For manual setup, WorkBuddy's MCP config lives at `~/.workbuddy/mcp.json` and looks like this (replace both placeholders):
 
 ```json
 {
