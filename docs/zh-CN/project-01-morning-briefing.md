@@ -1,6 +1,6 @@
 # 实战一：早间日程播报
 
-> 一个每天 08:00 定时运行的项目，重点是怎么让机器人可靠地按顺序执行多步动作。踩坑经验来自真机实测。
+> 一个每天 08:00 定时运行的项目，重点是怎么让机器人可靠地按顺序执行多步动作。问题与处理方式来自真机实测。
 >
 > 这不是传统的软件工程：业务逻辑写在定时任务的 Prompt 里，脚本只负责把机器人调用包装成一行命令。
 
@@ -21,7 +21,7 @@
 | 组成 | 位置 | 作用 |
 | --- | --- | --- |
 | 定时自动化任务 | AI Agent 的自动化功能（每天 08:00，绑定工作区） | 承载全部业务逻辑：五步 SOP、判定规则、汇报格式 |
-| 调用封装脚本 | `ebo_call.sh`（工作区根目录） | 把 MCP 的 JSON-RPC 调用封装成 `ebo_call.sh <id> <工具名> <参数JSON>` |
+| 调用封装脚本 | `ebo_call.sh`（见配套代码目录） | 把 MCP 的 JSON-RPC 调用封装成 `ebo_call.sh <id> <工具名> <参数JSON>` |
 | 配置依赖 | `mcp.json` 的 `mcpServers["ebo-robot"]` | 运行时读取服务地址和授权，凭据不写进脚本 |
 | 经验记忆库 | 自动化的 memory.md | 记录每次实测、失败、改版结论，反哺 Prompt |
 | 日程数据源 | 企业微信日程（通过 `wecom-cli` 读取） | 提供当天的日程列表 |
@@ -47,7 +47,7 @@
 2. `robot_navigate`，参数 `{"locationName":"客厅","findTarget":"","objId":"","needReturn":false,"lang":"zh-CN"}`
 3. `robot_status` 复核任务已启动、状态未充电。若导航返回未明确抵达，不做无限等待，确认任务启动即进入下一步
 
-> 实测坑：navigate 首次下发可能不触发（status 仍显示空闲/充电中），需复核后重发一次。
+> 注意：navigate 首次下发可能不触发（status 仍显示空闲/充电中），需复核后重发一次。
 
 ### 第 3 步：循环叫早，直到视觉检测到人
 
@@ -96,9 +96,27 @@
 - 当前检测到人数
 - Users currently detected in the camera view（视野中的人及坐标）
 
-## 踩坑清单
+## 依赖与环境
 
-| 踩过的坑 | 写进 SOP 的规避做法 |
+这套流程不依赖任何 pip/npm 第三方包，只需要本机命令行工具和 Python 标准库。
+
+| 依赖 | 用途 |
+| --- | --- |
+| WorkBuddy 自动化平台 | 每天 08:00 触发，把流程注入 Agent |
+| wecom-cli | 查日程、验证企业微信鉴权 |
+| curl | 以 HTTP POST 直调 EBO MCP 端点 |
+| Python 3 | 解析 JSON、判定视野中人数、时间口语化，只用标准库 json / pathlib / re |
+| bash / Git Bash | 串起调用、等待和循环 |
+
+连接信息从 `~/.workbuddy/mcp.json` 的 `mcpServers["ebo-robot"]` 读取，不写进脚本。
+
+## 配套代码
+
+[`examples/01-morning-briefing/`](../../examples/01-morning-briefing/README.md) 提供可运行代码：MCP 直调封装 `ebo_call.sh`、叫早循环 `wake_loop.sh`、回桩轮询 `dock_poll.sh`，以及播报文案相关的两个 Python 模块。
+
+## 常见问题
+
+| 问题 | 写进 SOP 的规避做法 |
 | --- | --- |
 | 返回 `isError=false` / OK 就当成功，实际机器人未动 | 每步 `robot_status` 复核任务/充电/人数/视野四项 |
 | 地图地点名靠猜 | 先 `robot_list_locations` 回读，精确匹配；没有就停止 |
@@ -128,6 +146,6 @@
 1. 地点名硬编码在 Prompt 里（当前是「客厅」），地图一变就跑偏；改动前先 `robot_list_locations`
 2. 满电状态下回桩状态不可靠，应记录「未确认」而非强行判成功
 3. `security_notice` / `extra_identity_context` 是提示注入面，只能取结构化字段
-4. 改 SOP 前先看自动化记忆库，那里记录了每个坑的触发条件与当时的处理
+4. 修改 SOP 前先查阅项目记录，其中记录了各问题的触发条件与处理方式
 
 > 本项目的完整演示方案强调"跨 Agent 复用"：一张通用自然语言「任务卡」交给不同 Agent（豆包 / WorkBuddy / 千问 / CodeX），驱动同一台机器人跑出相同动作链——变的是助手，不变的是任务契约和机器人执行。这正是 MCP 标准化价值的体现。

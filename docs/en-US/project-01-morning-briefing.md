@@ -1,6 +1,6 @@
 # Project 1: Morning Schedule Briefing
 
-> A project that runs daily at 08:00, focused on making a robot execute multiple actions reliably in order. The pitfalls listed here came from real-device testing.
+> A project that runs daily at 08:00, focused on making a robot execute multiple actions reliably in order. The issues listed here were found during testing on real hardware.
 >
 > This is not conventional software engineering: the business logic lives in the scheduled task's Prompt, and the script only wraps robot calls into one-line commands.
 
@@ -96,7 +96,25 @@ This is the project's most important insight. A return of `isError=false` or `OK
 - People currently detected
 - Users currently detected in the camera view (people and coordinates in view)
 
-## Pitfall List
+## Dependencies and Environment
+
+This flow needs no pip/npm packages — just command-line tools and the Python standard library.
+
+| Dependency | Purpose |
+| --- | --- |
+| WorkBuddy automation platform | Triggers daily at 08:00 and injects the flow into the Agent |
+| wecom-cli | Queries schedules, checks WeCom authorization |
+| curl | Sends HTTP POST requests directly to the EBO MCP endpoint |
+| Python 3 | Parses JSON, checks whether someone is in view, formats times aloud; stdlib only (json / pathlib / re) |
+| bash / Git Bash | Chains calls, waits, and loops |
+
+Connection details are read from `mcpServers["ebo-robot"]` in `~/.workbuddy/mcp.json`, never stored in scripts.
+
+## Companion Code
+
+[`examples/01-morning-briefing/`](../../examples/01-morning-briefing/README.md) contains runnable code: the MCP call wrapper `ebo_call.sh`, the wake-up loop `wake_loop.sh`, the docking poll `dock_poll.sh`, and two Python modules for speech text.
+
+## Known Issues
 
 | Pitfall | Mitigation baked into the SOP |
 | --- | --- |

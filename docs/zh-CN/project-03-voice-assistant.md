@@ -69,6 +69,18 @@ pip install faster-whisper "av==15.0.0"
 
 ffmpeg 的 stderr 会刷 `non monotonically increasing dts` / `PPS id out of range` / `skipping invalid undecodable nalu` 等无害警告，脚本里已过滤；不处理会淹没真正的输出。
 
+精确依赖版本（`examples/03-voice-assistant/requirements.txt`）：
+
+```text
+faster-whisper==1.2.1
+av==15.0.0
+numpy==2.5.5
+```
+
+## 配套代码
+
+[`examples/03-voice-assistant/`](../../examples/03-voice-assistant/README.md) 提供三个阶段的完整脚本：`ebo_rtsp_asr.py`（固定切段转写）、`ebo_voice_agent.py`（VAD 交互转写）、`voice_loop.py`（语音闭环），以及脚本与 Agent 之间的文件协议说明。
+
 ## 三个阶段的实现
 
 ### 阶段一：`ebo_rtsp_asr.py` — 固定切段转写（已交付、实测成功）
@@ -144,9 +156,9 @@ Agent 侧驱动流程（关键，必须常驻轮询，不能发完就走）：
 
 回复要求：简洁、口语化、适合朗读，避免长句和难念符号。
 
-## ASR 避坑（识别质量）
+## ASR 识别质量的注意事项
 
-| 坑 | 结论 |
+| 问题 | 结论 |
 | --- | --- |
 | 模型选择 | `base` 会出现重复幻觉（`对话对话对话`、`货物的货物`）；`small` 明显更准，CPU 上每句约 2–5s，模型加载 5–10s。默认已设为 small |
 | 上下文串联 | 必设 `condition_on_previous_text=False`，否则上下文会放大幻觉 |
@@ -157,7 +169,7 @@ Agent 侧驱动流程（关键，必须常驻轮询，不能发完就走）：
 
 做过对照实验：完全不带 prompt 也能识别出目标句，说明识别到的是真人声，不是提示词幻觉。
 
-## 唤醒词避坑（实测踩过）
+## 唤醒词匹配的注意事项
 
 用户说"MAX过来"，Whisper 实际识别成"马克斯过来"和"馬克思過來"（繁体），字面 `in` 匹配会 100% 失败。做了两件事来解决：
 

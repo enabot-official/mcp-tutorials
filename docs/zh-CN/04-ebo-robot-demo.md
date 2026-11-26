@@ -59,11 +59,11 @@
 
 ### 一个典型坑：跟随停不下来
 
-`robot_stop_patrol` 停不了 AI 跟随模式。想停止跟随，要说「停止所有动作」，对应 `robot_move(moveId=5)`（完全停止）。这个坑在[两个实战项目](project-01-morning-briefing.md)里都真实踩过。
+`robot_stop_patrol` 停不了 AI 跟随模式。想停止跟随，要说「停止所有动作」，对应 `robot_move(moveId=5)`（完全停止）。这一问题在[实战项目](project-01-morning-briefing.md)中也出现过。
 
 ## 下一步
 
 把这套流程用到真实项目里：
 
-- [实战一：早间日程播报](project-01-morning-briefing.md)——定时任务 + 状态轮询 + 完整踩坑库
+- [实战一：早间日程播报](project-01-morning-briefing.md)——定时任务 + 状态轮询 + 完整问题清单
 - [实战二：智能家居联动](project-02-smart-home.md)——双 MCP 通道 + 常驻程序 + 硬件不完美适配

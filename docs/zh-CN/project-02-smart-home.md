@@ -109,7 +109,7 @@
 
 用官方 SDK 的 streamable HTTP 客户端建立会话，`ClientSession` 必须 `async with` 进入以启动内部 dispatcher，然后 `initialize()`。
 
-> 踩坑：SDK v2.3 不能用 `StreamableHTTPTransport(url, http_client)`；`ClientSession` 不能直接构造后调用；工具 schema 属性是 `input_schema`（非 `inputSchema`）；SDK 内部用 httpx2，别传 `timeout`。
+> 注意：SDK v2.3 不能用 `StreamableHTTPTransport(url, http_client)`；`ClientSession` 不能直接构造后调用；工具 schema 属性是 `input_schema`（非 `inputSchema`）；SDK 内部使用 httpx2，不要传 `timeout`。
 
 ### TTS 等待（speak_and_wait）
 
@@ -171,7 +171,27 @@ light.set('on', True)
 
 用标志文件控制常驻进程：启动时创建 `door_welcome.run` 写入 `running`，删除后下个轮询周期退出；`__main__` 的 `finally` 兜底删除标志文件。清理函数覆盖所有退出路径。
 
-## 踩坑汇总（复刻时务必避免）
+## 依赖与环境
+
+Python 3.11+，用 uv 管理环境，Windows / macOS / Linux 均可。依赖版本是项目实测可用的下限：
+
+```text
+python-dotenv>=1.2.1
+websockets>=15.0.1
+mcp>=1.20.0
+pydantic>=2.12.3
+mcp-proxy>=0.10.0
+fastmcp>=2.13.0.2
+mijiaAPI>=3.0.0
+```
+
+EBO 侧核心是 `mcp`，米家侧核心是 `mijiaAPI`。首次使用需扫码登录米家，凭证保存在 `~/.config/mijia-api`；EBO 令牌建议通过环境变量 `EBO_TOKEN` 注入。
+
+## 配套代码
+
+[`examples/02-smart-home/`](../../examples/02-smart-home/README.md) 提供完整可运行的 `door_welcome.py`，以及 `requirements.txt` 和运行脚本。设备名、导航地点、文案、超时与重试参数都在文件顶部配置区修改。
+
+## 已知问题与规避方式
 
 ### 环境与配置
 
@@ -235,4 +255,4 @@ uv run --python 3.11 door_welcome.py
 - 短生命周期脚本退出期偶发 anyio cancel scope 警告，常驻主程序未复现
 - 真人名字的真实返回格式已实测确认（JSON 坐标 + 全大写），解析与规范化逻辑已用真实文本样例验证
 
-> 一句话总结：难点不在流程编排本身，而在适配真实硬件/协议的不完美——环境差异、SDK 变更、TTS 时序、脏数据格式、间歇性离线、状态残留。每一处加固都是被真机实测"打"出来的。
+> 难点不在流程编排，而在适配真实硬件与协议：环境差异、SDK 变更、TTS 时序、脏数据格式、间歇性离线、状态残留。文中的加固措施都来自真机验证。

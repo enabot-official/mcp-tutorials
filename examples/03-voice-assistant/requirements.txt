@@ -1,0 +1,10 @@
+# Python 3.13 / pip 26.1.2
+faster-whisper==1.2.1
+av==15.0.0          # 唯一兼容档位: 14 无 py3.13 wheel, 19 与 faster-whisper 不兼容
+numpy==2.5.5
+
+# 系统依赖
+#   ffmpeg 9.0.2 full build (gyan.dev), 需在 PATH 中
+#   curl (Windows 调用需 --ssl-no-revoke)
+
+# 模型下载加速(国内): export HF_ENDPOINT=https://hf-mirror.com

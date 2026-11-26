@@ -1,6 +1,6 @@
 # MCP 是什么
 
-> 如果你想直接用大白话指挥 EBO 机器人，你其实不需要深入理解 MCP——按 [入门教程](ebo-mcp-getting-started.md) 配好就能用。这篇是给想知道"背后是怎么回事"的读者看的。
+> 如果你想直接用自然语言指挥 EBO 机器人，你其实不需要深入理解 MCP——按 [入门教程](ebo-mcp-getting-started.md) 配好就能用。这篇是给想知道"背后是怎么回事"的读者看的。
 
 ## 本文目标
 
@@ -16,7 +16,7 @@
 
 MCP（Model Context Protocol，模型上下文协议）就是为解决这个 N×M 问题而生的开放标准：外部系统按统一规范把自己暴露成「MCP Server」，AI 应用作为「MCP Client」按统一方式调用。一次适配，处处可用。
 
-对我们的场景而言，这意味着：EBO 机器人只要提供一个 MCP 接口，豆包、WorkBuddy、千问、CodeX 等任何支持 MCP 的 Agent 都能控制它——这正是[实战一](project-01-morning-briefing.md)里"一张任务卡换不同 Agent、机器人动作一致"的基础。
+对这一场景，这意味着：EBO 机器人只要提供一个 MCP 接口，豆包、WorkBuddy、千问、CodeX 等任何支持 MCP 的 Agent 都能控制它——这也是[实战一](project-01-morning-briefing.md)中同一套任务在不同 Agent 下动作一致的原因。
 
 ## 核心概念与架构
 
@@ -58,7 +58,7 @@ MCP（Model Context Protocol，模型上下文协议）就是为解决这个 N×
 
 ## 小结与延伸阅读
 
-一句话：MCP 让 AI Agent 用统一方式发现并调用外部能力。对本教程来说，它让"用大白话指挥 EBO 机器人"成为现实，且不受具体 Agent 限制。
+一句话：MCP 让 AI Agent 用统一方式发现并调用外部能力。对本教程来说，它让"用自然语言指挥 EBO 机器人"成为实现，且不受具体 Agent 限制。
 
 - [MCP 官方文档](https://modelcontextprotocol.io/)
 - 下一步：[快速开始](02-quickstart.md) → [工具、资源与提示词](03-tools-resources.md) → [EBO 控制示例](04-ebo-robot-demo.md)

@@ -69,6 +69,18 @@ pip install faster-whisper "av==15.0.0"
 
 ffmpeg's stderr floods with harmless warnings (`non monotonically increasing dts`, `PPS id out of range`, `skipping invalid undecodable nalu`). The scripts filter them; otherwise they drown out real output.
 
+Exact dependency versions (see `examples/03-voice-assistant/requirements.txt`):
+
+```text
+faster-whisper==1.2.1
+av==15.0.0
+numpy==2.5.5
+```
+
+## Companion Code
+
+[`examples/03-voice-assistant/`](../../examples/03-voice-assistant/README.md) contains all three scripts: `ebo_rtsp_asr.py` (fixed-chunk transcription), `ebo_voice_agent.py` (VAD interaction), and `voice_loop.py` (voice loop), plus the file-bridge protocol between the script and the Agent.
+
 ## Three Stages of Implementation
 
 ### Stage 1: `ebo_rtsp_asr.py` — Fixed-chunk transcription (delivered, tested successfully)
@@ -144,7 +156,7 @@ Agent-side driver (critical: stay resident and poll — never end the turn after
 
 Reply style: concise, conversational, easy to read aloud — avoid long sentences and hard-to-pronounce symbols.
 
-## ASR Pitfalls (Recognition Quality)
+## ASR Recognition Quality Notes
 
 | Pitfall | Conclusion |
 | --- | --- |
@@ -157,7 +169,7 @@ Reply style: concise, conversational, easy to read aloud — avoid long sentence
 
 A control experiment recognized the target sentence with no prompt at all, which suggests the recognition came from a real voice rather than prompt hallucination.
 
-## Wake Word Pitfalls (Learned the Hard Way)
+## Wake Word Matching Notes
 
 The user said "MAX过来", but Whisper transcribed it as "马克斯过来" or "馬克思過來" (traditional characters), so literal `in` matching failed every time. Two fixes:
 

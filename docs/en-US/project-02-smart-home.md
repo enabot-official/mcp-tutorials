@@ -171,7 +171,27 @@ light.set('on', True)
 
 Control the daemon with a flag file: create `door_welcome.run` with `running` at startup, delete it to exit on the next polling cycle; `__main__`'s `finally` removes it as a fallback. The cleanup function covers all exit paths.
 
-## Pitfall Summary (avoid when replicating)
+## Dependencies and Environment
+
+Python 3.11+ with uv, on Windows / macOS / Linux. These versions are the tested minimums:
+
+```text
+python-dotenv>=1.2.1
+websockets>=15.0.1
+mcp>=1.20.0
+pydantic>=2.12.3
+mcp-proxy>=0.10.0
+fastmcp>=2.13.0.2
+mijiaAPI>=3.0.0
+```
+
+`mcp` is the core EBO dependency; `mijiaAPI` is the core Mijia dependency. First use requires scanning a QR code to log in to Mijia; credentials are stored in `~/.config/mijia-api`. Inject the EBO token through the `EBO_TOKEN` environment variable.
+
+## Companion Code
+
+[`examples/02-smart-home/`](../../examples/02-smart-home/README.md) contains the complete runnable `door_welcome.py`, plus `requirements.txt` and run commands. Device names, navigation locations, speech text, and timeout/retry values are all in the config block at the top of the file.
+
+## Known Issues
 
 ### Environment & config
 

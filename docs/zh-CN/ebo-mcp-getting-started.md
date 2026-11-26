@@ -2,7 +2,7 @@
 
 ## 这是什么？
 
-EBO 机器人现在支持 MCP（AI 控制接口）。简单说，你可以用 AI 助手（比如 WorkBuddy、CodeX 等 AI Agent，注意需要是 AI Agent）直接用大白话指挥你的机器人，不用打开 APP 点按钮。
+EBO 机器人现在支持 MCP（AI 控制接口）。你可以用 AI 助手（比如 WorkBuddy、CodeX 等 AI Agent，注意需要是 AI Agent）直接用自然语言指挥机器人，不用打开 APP 点按钮。
 
 比如你对 AI 说「去客厅看看」，AI 就会自动让机器人走到客厅，拍张照片发给你。
 

@@ -2,7 +2,7 @@
 
 Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) on Enabot EBO robots.
 
-> Complete first version — from zero basics to three full real-world projects. All screenshots are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
+> Official MCP tutorials for Enabot EBO robots: from basic concepts to three complete projects, with runnable companion code. All screenshots and code are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
 
 ## Language
 
@@ -13,8 +13,8 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 ### ① Getting Started
 
-1. [EBO Robot MCP Getting Started](docs/en-US/ebo-mcp-getting-started.md) — from token to plain-language control: Claude Desktop setup, example commands, model comparison, FAQ (with screenshots)
-2. [Quickstart: Your First Command in 5 Minutes](docs/en-US/02-quickstart.md) — condensed version, fastest path to one run
+1. [EBO Robot MCP Getting Started](docs/en-US/ebo-mcp-getting-started.md) — from token to natural-language control: Claude Desktop setup, example commands, model comparison, FAQ (with screenshots)
+2. [Quickstart: Your First Command in 5 Minutes](docs/en-US/02-quickstart.md) — condensed version for a first successful call
 3. [What is MCP](docs/en-US/01-mcp-intro.md) — protocol background, architecture, can/cannot
 
 ### ② Understanding Capabilities
@@ -25,16 +25,18 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 ### ③ Going Further
 
-7. [EBO MCP Troubleshooting and Best Practices](docs/en-US/ebo-mcp-troubleshooting.md) — config pitfalls, connection checks, sequential execution with status polling, on-site failure diagnosis, the follow-mode pitfall, multiple robots, A/V limits (with screenshots)
+7. [EBO MCP Troubleshooting and Best Practices](docs/en-US/ebo-mcp-troubleshooting.md) — config issues, connection checks, sequential execution with status polling, on-site failure diagnosis, the follow-mode issue, multiple robots, A/V limits (with screenshots)
 8. [Prompt Template Collection](docs/en-US/ebo-mcp-prompts.md) — field-tested templates: navigate+photo, wake-up detection, schedule broadcast, stop following, docking, multiple robots, smart-home integration
 
 ### ④ Real Projects
 
-9. [Project 1: Morning Schedule Briefing](docs/en-US/project-01-morning-briefing.md) — runs daily at 08:00: five-step SOP, state-verification polling, wake-up loop, 9 pitfalls, evolution history
-10. [Project 2: Smart Home Integration (Door Welcome)](docs/en-US/project-02-smart-home.md) — EBO + Mijia dual MCP channels: 8-step flow, name tri-state, core code, 13 pitfalls, config parameter table
-11. [Project 3: Turning EBO into a Voice Assistant](docs/en-US/project-03-voice-assistant.md) — RTSP audio + ASR + Agent bridge: three implementation stages, wake-word phonetic matching, audio/environment pitfalls, and the real reason the E2E loop is still blocked
+9. [Project 1: Morning Schedule Briefing](docs/en-US/project-01-morning-briefing.md) — runs daily at 08:00: five-step flow, state-verification polling, wake-up loop, known issues, evolution history
+10. [Project 2: Smart Home Integration (Door Welcome)](docs/en-US/project-02-smart-home.md) — EBO + Mijia dual MCP channels: 8-step flow, name tri-state, core code, known issues, config parameter table
+11. [Project 3: Turning EBO into a Voice Assistant](docs/en-US/project-03-voice-assistant.md) — RTSP audio + ASR + Agent bridge: three stages, wake-word phonetic matching, audio and environment constraints, why the E2E loop is still blocked
 
-> All three projects come from real, live-running systems — complete cases for taking MCP from "it works" to "it runs stably long-term". Project 3 also honestly documents what is not yet working and why.
+> All three projects come from systems that ran in practice, showing how to take MCP from "working" to stable long-term operation. Project 3 also records what is not yet working and why.
+
+Runnable companion code: [examples/](examples/README.md) contains complete scripts, dependency lists, and run instructions for all three projects.
 
 ## Layout
 
@@ -47,7 +49,7 @@ mcp-tutorials/
 │   │   ├── ebo-mcp-*             # getting started / tools / troubleshooting / prompts
 │   │   └── project-01/02/03      # three real-world projects
 ├── assets/                       # 8 bilingual screenshots (redacted)
-├── examples/                     # Runnable example code
+├── examples/                     # Runnable scripts + dependencies + run notes for 3 projects
 └── LICENSE
 ```
 
