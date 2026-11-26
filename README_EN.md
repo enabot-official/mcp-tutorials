@@ -1,10 +1,31 @@
-# MCP Tutorials
+# EBO Robot MCP Tutorials
 
-Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) on Enabot EBO robots.
+Let an AI Agent control an Enabot EBO robot in plain language — from your first successful call to three projects you can adapt.
 
-> Official MCP tutorials for Enabot EBO robots: from basic concepts to three complete projects, with runnable companion code. All screenshots and code are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
+中文 ([README.md](README.md)) · Bilingual · Runnable companion code
 
-> Supported models: MCP is available on the EBO MAX and EBO Air2 Plus only. All three projects in this repository were tested on the EBO MAX.
+> **5-minute goal**: connect the robot → read its status → send your first command. Follow the [quickstart](docs/en-US/02-quickstart.md) and use the [self-check script](examples/00-connection-check/README_EN.md) to confirm real connectivity.
+
+![MCP connected, 15/15 tools enabled](assets/mcp-connected-EN.png)
+
+## Supported Models
+
+| Model | MCP support | Tool capability | Projects in this repo |
+| --- | --- | --- | --- |
+| EBO MAX | Supported | All 15 tools | All three projects tested on this model |
+| EBO Air2 Plus | Supported | 11 core tools | Not tested; see [model comparison](docs/en-US/ebo-mcp-getting-started.md#whats-the-difference-between-ebo-max-and-ebo-air2-plus) |
+
+Other models do not support MCP yet. All screenshots and code are redacted; no real tokens, endpoints, device IDs, or LAN IPs are included.
+
+## Three Real Projects
+
+| Project | What it shows | Value |
+| --- | --- | --- |
+| [Morning Schedule Briefing](docs/en-US/project-01-morning-briefing.md) | Scheduled task + AI orchestration + multi-step control | Best entry point |
+| [Smart Home Integration](docs/en-US/project-02-smart-home.md) | Python daemon + dual MCP channels | Strong engineering example |
+| [Voice Assistant](docs/en-US/project-03-voice-assistant.md) | RTSP + ASR + Agent + TTS | Technical exploration |
+
+Code lives in [examples/](examples/README.md): a connectivity check, a minimal call example, and complete scripts for all three projects.
 
 ## Language
 
@@ -38,8 +59,6 @@ Bilingual (Chinese / English) tutorials and real-world projects for [MCP (Model 
 
 > All three projects come from systems that ran in practice, showing how to take MCP from "working" to stable long-term operation. Project 3 also records what is not yet working and why.
 
-Runnable companion code: [examples/](examples/README.md) contains complete scripts, dependency lists, and run instructions for all three projects.
-
 ## Layout
 
 ```
@@ -51,7 +70,9 @@ mcp-tutorials/
 │   │   ├── ebo-mcp-*             # getting started / tools / troubleshooting / prompts
 │   │   └── project-01/02/03      # three real-world projects
 ├── assets/                       # 8 bilingual screenshots (redacted)
-├── examples/                     # Runnable scripts + dependencies + run notes for 3 projects
+├── examples/
+│   ├── 00-connection-check/      # Connectivity check + minimal Python call example
+│   └── 01/02/03-*                # Runnable code + dependencies for 3 projects
 └── LICENSE
 ```
 

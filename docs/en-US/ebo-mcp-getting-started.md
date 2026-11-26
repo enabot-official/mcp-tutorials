@@ -29,7 +29,17 @@ For example, say "go check the living room" to your AI, and it will automaticall
 
 Many AI Agents support MCP. Tested and working ones include Doubao, WorkBuddy, Qwen, and CodeX. Claude Desktop, ChatGPT Desktop, Cursor, and other mainstream tools also support MCP.
 
-Note that every Agent has a different MCP configuration entry point and workflow — copying one tool's steps usually won't work for another. The easiest approach is to send your MCP token directly to the Agent and let it guide you through the setup; it will give you steps tailored to its own interface.
+Clients differ in MCP transport, config format, and remote-connection support. The table below grades them by how thoroughly they have been verified:
+
+| Client | Support status |
+| --- | --- |
+| WorkBuddy | Fully tested; this guide and all three projects were built on it |
+| Doubao, Qwen, CodeX | Configurable, but specific versions and feature completeness are still being verified |
+| Claude Desktop, ChatGPT Desktop, Cursor | Support MCP in principle; verify against your client version |
+
+"Supports MCP" only means the client can load the tool list — it does not guarantee every tool works in that client. Run the [connectivity check](../../examples/00-connection-check/README_EN.md) before relying on it.
+
+Note that every Agent has a different MCP configuration entry point and workflow — copying one tool's steps usually won't work for another. The easiest approach is to send your MCP token directly to the Agent and let it guide you through the setup; it will give you steps tailored to its own interface (see the FAQ at the end for token safety).
 
 This guide and all three companion projects were built with WorkBuddy, so the configuration example below uses WorkBuddy too.
 
@@ -40,12 +50,14 @@ This guide and all three companion projects were built with WorkBuddy, so the co
    - `<YOUR_TOKEN>`: the token you copied from the app
    - `<EBO_MAX_MCP_ENDPOINT>` / `<EBO_PLUS_MCP_ENDPOINT>`: the MCP endpoint for your robot. Check the AI Linked Programming page in the "Yibao Robot" app or ask official support for the address. This tutorial does not publish the concrete endpoints.
 
+Both models use `ebo-robot` as the server name, matching what the companion code reads. Only the endpoint differs.
+
 For EBO MAX:
 
 ```json
 {
   "mcpServers": {
-    "ebo": {
+    "ebo-robot": {
       "type": "http",
       "url": "<EBO_MAX_MCP_ENDPOINT>/api/v1/mcp",
       "headers": {
@@ -61,7 +73,7 @@ For EBO Air2 Plus:
 ```json
 {
   "mcpServers": {
-    "ebo-plus": {
+    "ebo-robot": {
       "type": "http",
       "url": "<EBO_PLUS_MCP_ENDPOINT>/api/v1/mcp",
       "headers": {
@@ -147,8 +159,12 @@ A: That's expected. AI follow mode is a special state — say "stop all actions"
 
 Q: Can I control two robots at the same time?
 
-A: Yes. Each robot has its own token and endpoint; just add them separately in the AI config. Give them different names to tell them apart, e.g. "Living room EBO" and "Bedroom EBO".
+A: Yes. Each robot has its own token and endpoint; add one service per robot in the config. Use `ebo-robot` as the default server name; for multiple robots pick distinct names (e.g. `ebo-living`, `ebo-bedroom`), but note the companion code reads `ebo-robot` by default — change the name in the script if you use a custom one.
 
 Q: Can I hear audio from the robot?
 
 A: Currently MCP only supports making the robot "speak" (text-to-speech); it does not stream audio from the robot's microphone in real time. For two-way communication, use RTSP LAN video streaming for audio and video.
+
+Q: Is it safe to send my token to an Agent to configure things?
+
+A: The token is effectively control of your robot, and sending it to an Agent means that Agent can read it. A safer approach is to fill the token into your local `~/.workbuddy/mcp.json` yourself and let the Agent only generate the config content, never touch the real credential. Do not send tokens to untrusted third-party services or post them publicly. In either case, never put the token in code or commit it to a repository.

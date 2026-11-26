@@ -32,7 +32,7 @@ if sys.platform == 'win32':
 
 # ==================== 配置区 ====================
 EBO_URL = os.environ.get('EBO_URL', '<EBO_MCP_ENDPOINT>')
-EBO_TOKEN = os.environ.get('EBO_TOKEN', 'ebo_mcp_71P2lCoji5ewnOvAbdarjsbdeR07XI0L')
+EBO_TOKEN = os.environ.get('EBO_TOKEN', '<YOUR_TOKEN>')
 DOOR_SENSOR = 'Xiaomi Door and Window Sensor 3'   # 米家门窗传感器名称
 LIGHT_NAME = '灯泡'                                # 米家灯泡名称
 DOOR_LOCATION = '客厅'                             # EBO 地图中的导航目标位置名

@@ -27,7 +27,7 @@ For manual setup, WorkBuddy's MCP config lives at `~/.workbuddy/mcp.json` and lo
 ```json
 {
   "mcpServers": {
-    "ebo": {
+    "ebo-robot": {
       "type": "http",
       "url": "<EBO_MAX_MCP_ENDPOINT>/api/v1/mcp",
       "headers": { "Authorization": "Bearer <YOUR_TOKEN>" }
@@ -36,9 +36,17 @@ For manual setup, WorkBuddy's MCP config lives at `~/.workbuddy/mcp.json` and lo
 }
 ```
 
-Save and fully restart the client. Seeing the MCP connection icon and 15/15 tools enabled means success.
+Save and fully restart the client. Seeing the MCP connection icon and 15/15 tools enabled means the tool list has loaded.
 
 ![MCP connected, 15/15 tools enabled](../../assets/mcp-connected-EN.png)
+
+A loaded tool list does not mean the robot can actually respond. Run the self-check, which calls the read-only tool `robot_status` to confirm real connectivity:
+
+```bash
+python examples/00-connection-check/check_connection.py
+```
+
+Success means every step shows `[OK]`; on any failure the script tells you exactly what to check. See the [connectivity check](../../examples/00-connection-check/README_EN.md) for details.
 
 ### 3. Send a command
 

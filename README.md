@@ -1,10 +1,31 @@
-# MCP 教程
+# EBO 机器人 MCP 教程
 
-面向 Enabot EBO 机器人的 [MCP（Model Context Protocol）](https://modelcontextprotocol.io/) 教程与实战项目，中英双语。
+让 AI Agent 用自然语言控制 Enabot EBO 机器人——从第一次成功调用，到三个可以直接改造的实战项目。
 
-> 面向 Enabot EBO 机器人的官方 MCP 教程：从基础概念到三个完整实战项目，配套代码可直接运行。所有截图与代码均已脱敏，不含真实令牌、接口地址、设备号或内网 IP。
+[English](README_EN.md) · 中英双语 · 配套代码可运行
 
-> 支持机型：目前仅 EBO MAX 与 EBO Air2 Plus 支持 MCP。本库三个实战项目均以 EBO MAX 实测。
+> **5 分钟目标**：连接机器人 → 拿到状态 → 发出第一条指令。跟着[快速开始](docs/zh-CN/02-quickstart.md)走，并用[自检脚本](examples/00-connection-check/README.md)确认真的连通。
+
+![MCP 服务连接成功，15/15 工具已启用](assets/mcp-connected-CN.png)
+
+## 支持机型
+
+| 机型 | MCP 支持 | 工具能力 | 本库项目 |
+| --- | --- | --- | --- |
+| EBO MAX | 支持 | 15 个完整工具 | 三个实战项目均在该机型实测 |
+| EBO Air2 Plus | 支持 | 11 个核心工具 | 未实测，详见[机型对比](docs/zh-CN/ebo-mcp-getting-started.md#ebo-max-和-ebo-air2-plus-有什么区别) |
+
+其他机型暂不支持 MCP。所有截图与代码均已脱敏，不含真实令牌、接口地址、设备号或内网 IP。
+
+## 三个实战项目
+
+| 项目 | 展示什么 | 工程价值 |
+| --- | --- | --- |
+| [早间日程播报](docs/zh-CN/project-01-morning-briefing.md) | 定时任务 + AI 编排 + 多步控制 | 入门价值高 |
+| [智能家居联动](docs/zh-CN/project-02-smart-home.md) | Python 常驻程序 + 双 MCP 通道 | 工程价值高 |
+| [语音助手](docs/zh-CN/project-03-voice-assistant.md) | RTSP + ASR + Agent + TTS | 技术探索价值高 |
+
+配套代码在 [examples/](examples/README.md)，包含连通性自检、最小调用示例和三个项目的完整脚本。
 
 ## 语言
 
@@ -38,8 +59,6 @@
 
 > 三个实战项目均来自实际运行的环境，展示如何把 MCP 从"调通"用到长期稳定运行。实战三也记录了尚未跑通的环节及其原因。
 
-配套可运行代码见 [examples/](examples/README.md)：包含三个项目的完整脚本、依赖清单与运行说明。
-
 ## 目录结构
 
 ```
@@ -51,7 +70,9 @@ mcp-tutorials/
 │   │   ├── ebo-mcp-*             # 入门 / 工具 / 排错 / 提示词
 │   │   └── project-01/02/03      # 三个实战项目
 ├── assets/                       # 8 张中英截图（已脱敏）
-├── examples/                     # 三个项目的可运行代码 + 依赖清单 + 运行说明
+├── examples/
+│   ├── 00-connection-check/      # 连通性自检 + 最小 Python 调用示例
+│   └── 01/02/03-*                # 三个项目的可运行代码 + 依赖清单
 └── LICENSE
 ```
 

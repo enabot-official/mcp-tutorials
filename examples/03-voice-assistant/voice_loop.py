@@ -46,7 +46,7 @@ WINDOW_FRAMES = 32
 
 # MCP TTS 默认配置 (可用 --mcp-url / --mcp-token 覆盖, 或环境变量)
 DEFAULT_MCP_URL = "<EBO_MCP_ENDPOINT>"
-DEFAULT_MCP_TOKEN = "ebo_mcp_71P2lCoji5ewnOvAbdarjsbdeR07XI0L"
+DEFAULT_MCP_TOKEN = "<YOUR_TOKEN>"
 
 
 # ----------------------------- 文本工具 -----------------------------

@@ -27,7 +27,7 @@
 ```json
 {
   "mcpServers": {
-    "ebo": {
+    "ebo-robot": {
       "type": "http",
       "url": "<EBO_MAX_MCP_ENDPOINT>/api/v1/mcp",
       "headers": { "Authorization": "Bearer <YOUR_TOKEN>" }
@@ -36,9 +36,17 @@
 }
 ```
 
-保存后完全退出并重启客户端。看到 MCP 连接图标、工具数量显示 15/15 即为成功。
+保存后完全退出并重启客户端。看到 MCP 连接图标、工具数量显示 15/15，说明工具列表已加载。
 
 ![MCP 服务连接成功，15/15 工具已启用](../../assets/mcp-connected-CN.png)
+
+但工具列表加载不等于机器人真的能响应。跑一次自检，让脚本调用只读工具 `robot_status` 确认实际连通：
+
+```bash
+python examples/00-connection-check/check_connection.py
+```
+
+全部显示 `[OK]` 才算配置成功；任一步失败，脚本会告诉你具体该检查什么。详见[连通性自检](../../examples/00-connection-check/README.md)。
 
 ### 3. 发指令
 
