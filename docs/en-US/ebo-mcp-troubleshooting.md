@@ -61,6 +61,8 @@ Check in order:
 - If unsure, call `robot_list_locations` to get the exact names from the map, then pass them to `robot_navigate`
 - Keep location names short, unique, and unambiguous
 
+![Navigation locations in the app (Doorway, Living Room) — names must match MCP calls exactly](../../assets/map-locations-EN.jpg)
+
 ### 3.2 Running multiple actions in order (the big one)
 
 This is where most pitfalls lie. Two facts to understand first:
@@ -106,6 +108,10 @@ Each robot has its own token and endpoint. Use different server names in the con
 - MCP itself only supports making the robot "speak" (text-to-speech); it does not stream microphone audio in real time
 - For audio/video, use the **RTSP LAN stream**: enable it in the app and an IP address will be provided. It runs over the LAN to protect user privacy
 - The stream is mainly video (H.265 / H.264) with audio on a separate G.711a channel that needs separate handling
+
+![RTSP LAN address toggle in the app (IP redacted)](../../assets/rtsp-lan-EN.png)
+
+> Note: RTSP requires the AI Agent and the robot to be on the **same Wi-Fi**, and credentials are issued centrally by the backend (AP1). Only one MCP connection instance is allowed at a time. AccessKey must be re-obtained after expiration. Turning off the MCP service disconnects all sessions immediately.
 
 ## 4. Practice Examples
 

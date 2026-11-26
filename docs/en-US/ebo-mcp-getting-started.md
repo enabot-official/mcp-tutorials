@@ -18,6 +18,8 @@ For example, say "go check the living room" to your AI, and it will automaticall
 2. Find **AI Linked Programming** (AI 联动编程) and tap it
 3. You'll see an MCP token — **copy and store it safely**; you'll need it later
 
+![AI Linked Programming page in the Yibao Robot app (address and token redacted)](../../assets/token-app-EN.png)
+
 > **Note: the token expires — and keep it private**
 > - Tokens are valid for one month. If the AI can't connect later, just tap **Renew** in the app.
 > - If you tap **Regenerate**, all previously issued MCP tokens become invalid, and you'll need to reconfigure the new token in your AI Agent.
@@ -71,7 +73,9 @@ The following uses Claude Desktop as one example of a typical configuration.
 ```
 
 3. Save the file and restart Claude Desktop
-4. You'll see an MCP connection icon at the bottom of the chat box — the connection is successful
+4. You'll see an MCP connection icon at the bottom of the chat box — the connection is successful (the image below shows WorkBuddy with 15/15 tools enabled)
+
+![MCP service connected, 15/15 tools enabled](../../assets/mcp-connected-EN.png)
 
 ## Step 4: Start chatting
 
