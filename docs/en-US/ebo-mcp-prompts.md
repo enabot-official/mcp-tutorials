@@ -2,7 +2,7 @@
 
 Once MCP is configured, *how you ask* directly determines how well the robot performs. This collection has field-tested prompt templates you can copy directly or adapt.
 
-> Core principle: **state the goal + emphasize verification + set boundaries**. The robot has no per-step completion report, so for complex tasks explicitly tell the AI to "verify with `robot_status` before continuing".
+> Core principle: state the goal + emphasize verification + set boundaries. The robot has no per-step completion report, so for complex tasks explicitly tell the AI to "verify with `robot_status` before continuing".
 
 ## 1. Simple single-step commands
 
@@ -92,9 +92,9 @@ When someone enters (door sensor state changes):
 
 ## Four lessons for writing good prompts
 
-1. **Confirm location before navigating**: nearly every real project starts with `robot_list_locations` to avoid guessing names
-2. **Verify every step**: explicitly require the AI to confirm with `robot_status`, not to judge by an OK return
-3. **Bound loops and waits**: wake-up 10 rounds, dock polling 6 times, navigation 120 s — prevent hangs
-4. **Give failures an explicit fallback**: tell the AI "if no one is detected, skip the rest and dock directly" rather than retrying forever
+1. Confirm location before navigating: nearly every real project starts with `robot_list_locations` to avoid guessing names
+2. Verify every step: explicitly require the AI to confirm with `robot_status`, not to judge by an OK return
+3. Bound loops and waits: wake-up 10 rounds, dock polling 6 times, navigation 120 s — prevent hangs
+4. Give failures an explicit fallback: tell the AI "if no one is detected, skip the rest and dock directly" rather than retrying forever
 
 These lessons come from real pitfalls in [both projects](project-01-morning-briefing.md); read them alongside the [Troubleshooting guide](ebo-mcp-troubleshooting.md).

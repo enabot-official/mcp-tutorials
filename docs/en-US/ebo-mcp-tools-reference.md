@@ -10,7 +10,7 @@ EBO robots expose a set of tools through MCP that AI Agents call to control the 
 
 ### `robot_status`
 
-Query the robot's current status. This is the **most-used tool for sequential task execution** (see the polling section in [Troubleshooting and Best Practices](ebo-mcp-troubleshooting.md)).
+Query the robot's current status. This is the most-used tool for sequential task execution (see the polling section in [Troubleshooting and Best Practices](ebo-mcp-troubleshooting.md)).
 
 No parameters. Returns:
 
@@ -27,7 +27,7 @@ List all navigable location names on the robot's built map.
 
 No parameters. Returns the list of navigable places, or a notice if no map has been built yet.
 
-> **Call this before `robot_navigate` whenever you are not certain of the exact location name.** The name must match the map exactly.
+> Call this before `robot_navigate` whenever you are not certain of the exact location name. The name must match the map exactly.
 
 ## 2. Movement and Navigation
 
@@ -74,11 +74,11 @@ Perform a movement or skill action (forward, backward, turn, spin, figure-eight,
 | 2 | Move backward by distance | 10 | Snake wander |
 | 3 | Turn left by angle | 11 | Zigzag |
 | 4 | Turn right by angle | 12 | Spin |
-| 5 | **Full stop** | 13 | Break free |
+| 5 | Full stop | 13 | Break free |
 | 6 | Forward skill | 14 | Roam |
 | 7 | Figure-eight | 15 | Sway |
 
-> **`moveId=5` (full stop) is critical**: it is the only reliable way to stop AI follow mode. `robot_stop_patrol` cannot stop following (see [Troubleshooting](ebo-mcp-troubleshooting.md)).
+> `moveId=5` (full stop) is critical: it is the only reliable way to stop AI follow mode. `robot_stop_patrol` cannot stop following (see [Troubleshooting](ebo-mcp-troubleshooting.md)).
 
 ### `robot_stop_patrol`
 
@@ -86,7 +86,7 @@ Immediately stop an ongoing patrol, cruise, or navigation task.
 
 No parameters (except `lang`).
 
-> Note: this tool **cannot** stop recharging / returning to dock (use `robot_go_home` with `startUp=false`), and **cannot** stop AI follow mode (use `robot_move` with `moveId=5`).
+> Note: this tool cannot stop recharging / returning to dock (use `robot_go_home` with `startUp=false`), and cannot stop AI follow mode (use `robot_move` with `moveId=5`).
 
 ### `robot_go_home`
 
@@ -107,11 +107,11 @@ Start AI tracking so the robot follows a person or pet, or locks onto a target i
 | `mode` | integer | No | `0`=follow (keep following), `1`=lock (keep target in view) |
 | `trackTarget` | integer | No | Target to track: `4`=person (default), `3`=pet |
 
-> **Stop follow mode with `robot_move` using `moveId=5` (full stop)** — a pitfall found in real-world testing.
+> Stop follow mode with `robot_move` using `moveId=5` (full stop) — a pitfall found in real-world testing.
 
 ### `robot_search_360`
 
-Rotate 360 degrees in place to search for a person or pet. **This call blocks** until the robot finishes and reports the result (or a short timeout).
+Rotate 360 degrees in place to search for a person or pet. This call blocks until the robot finishes and reports the result (or a short timeout).
 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -174,6 +174,6 @@ Record a video clip.
 
 ## 6. Calling Conventions
 
-- **Call interval**: do not call tools at high frequency back-to-back; leave roughly one second or more between calls (see [Troubleshooting](ebo-mcp-troubleshooting.md)).
-- **Sequential execution**: the robot does not report "step completed" for each action. To chain actions, call `robot_status` after each step and poll the "device task" field until the previous step is finished before issuing the next one.
-- **Error feedback**: the robot currently has no active error reporting. Failures usually show up as "state didn't change" or "task stuck", so diagnose via status queries and on-site observation.
+- Call interval: do not call tools at high frequency back-to-back; leave roughly one second or more between calls (see [Troubleshooting](ebo-mcp-troubleshooting.md)).
+- Sequential execution: the robot does not report "step completed" for each action. To chain actions, call `robot_status` after each step and poll the "device task" field until the previous step is finished before issuing the next one.
+- Error feedback: the robot currently has no active error reporting. Failures usually show up as "state didn't change" or "task stuck", so diagnose via status queries and on-site observation.

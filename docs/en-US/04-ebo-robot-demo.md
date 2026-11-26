@@ -8,9 +8,9 @@ Understand the full chain "natural language → AI decision → tool call → ph
 
 ## Scenario and safety notes
 
-**Scenario**: say "go check the living room" and the AI navigates the robot to the living room and takes a photo for you.
+Scenario: say "go check the living room" and the AI navigates the robot to the living room and takes a photo for you.
 
-**Safety notes**:
+Safety notes:
 
 - The robot is a physical device; actions affect the real environment. Observe on-site during first tests
 - The token effectively grants robot control — don't share it or post it publicly
@@ -27,14 +27,14 @@ Understand the full chain "natural language → AI decision → tool call → ph
 
 For "go check the living room", the AI roughly decides:
 
-1. **Understand intent**: user wants to go to the living room and look → needs "navigate" + "photo", in order
-2. **Confirm location**: call `robot_list_locations` to get the exact name (avoid confusing "Living Room" and "Living Room 1")
-3. **Issue navigation**: call `robot_navigate(locationName="Living Room")`
-4. **Verify navigation**: call `robot_status` to see if the task started/arrived; no infinite waiting if unclear
-5. **Issue photo**: after confirmation, call `robot_take_photo`
-6. **Return result**: present the photo to the user
+1. Understand intent: user wants to go to the living room and look → needs "navigate" + "photo", in order
+2. Confirm location: call `robot_list_locations` to get the exact name (avoid confusing "Living Room" and "Living Room 1")
+3. Issue navigation: call `robot_navigate(locationName="Living Room")`
+4. Verify navigation: call `robot_status` to see if the task started/arrived; no infinite waiting if unclear
+5. Issue photo: after confirmation, call `robot_take_photo`
+6. Return result: present the photo to the user
 
-Note step 4 — this is the biggest difference between hardware control and pure software calls. **Sent ≠ executed** (see the sequential-execution chapter in [Troubleshooting](ebo-mcp-troubleshooting.md)).
+Note step 4 — this is the biggest difference between hardware control and pure software calls. Sent ≠ executed (see the sequential-execution chapter in [Troubleshooting](ebo-mcp-troubleshooting.md)).
 
 ## Correct pattern for sequential execution
 

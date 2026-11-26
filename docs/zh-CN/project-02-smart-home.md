@@ -1,6 +1,6 @@
 # 实战二：智能家居联动（开门迎宾）
 
-> 这是另一个真实落地的项目：把 EBO 机器人和米家设备通过两个 MCP 通道连起来。它展示了 MCP 教程里两种典型用法——**HTTP 传输的机器人控制** 和 **stdio 传输的本地设备集成**——以及一个长期常驻程序如何处理状态残留、脏数据和硬件不完美。
+> 把 EBO 机器人和米家设备通过两个 MCP 通道连起来：HTTP 传输控制机器人，stdio 传输集成本地设备。这里也记录了长期常驻程序怎么处理状态残留、脏数据和硬件不完美。
 
 ## 最终效果
 
@@ -15,7 +15,7 @@
 
 ## 设计原则
 
-**纯 Python 独立程序 + 两个 MCP 通道，不依赖 AI 实时编排**，适合展会/演示场景长时间稳定运行。
+纯 Python 独立程序 + 两个 MCP 通道，不依赖 AI 实时编排，适合展会/演示场景长时间稳定运行。
 
 这与实战一（定时自动化 + AI 编排）形成对比：
 - 实战一适合「每天一次、逻辑复杂、需要大模型判断」的场景
@@ -49,7 +49,7 @@
 ```
 
 > Token 从 APP 的「AI 联动编程」页获取，每个机器人绑定一个。地址同样在该页查看，本教程不公开。
-> 环境区分：正式环境与测试环境地址不同，**不同环境的地图数据也不同**，导航地点名以实际环境 `robot_list_locations` 返回为准。
+> 环境区分：正式环境与测试环境地址不同，不同环境的地图数据也不同，导航地点名以实际环境 `robot_list_locations` 返回为准。
 
 ### 2. Mijia MCP（stdio 传输）
 
@@ -84,14 +84,14 @@
 
 ## 完整执行流程（8 步）
 
-1. **门边沿检测**：主循环每 3 秒轮询；上一轮 `contact-state=True`（关门）且本轮 `False`（开门），且距上次触发 > 30 秒，才触发
-2. **导航到客厅**：`robot_navigate(locationName='客厅')`，随后轮询 `robot_status` 等到达（5 秒一次，最长 120 秒）
-3. **检测人**：三级探测——先查 `robot_status`；无人则等 10 秒再查；仍无人则调 `robot_search_360(objId='1')` 主动环顾；还无人则整段跳过
-4. **播报欢迎语**：识别到人名 →「{名字}，欢迎回家，为您打开客厅的灯」；只识别到人未返回人名 →「欢迎回家，为您打开客厅的灯」。**必须等完整播完**再进入下一步
-5. **开灯**：`light.set('on', True)`，最多 3 次重试（间隔 2 秒）
-6. **启动人跟随**：`robot_follow(mode=0, trackTarget=4)`
-7. **播报 + 播放音乐**：先播报「为您播放您最喜欢的音乐」，再 `robot_play_music(text='轻音乐')`；音乐与跟随并行持续
-8. **停止时清理现场**：`robot_music_control(controlType=4)` 停音乐 + `robot_move(moveId=5)` 完全停止跟随 + 关灯。用 `try/finally` 覆盖所有退出路径
+1. 门边沿检测：主循环每 3 秒轮询；上一轮 `contact-state=True`（关门）且本轮 `False`（开门），且距上次触发 > 30 秒，才触发
+2. 导航到客厅：`robot_navigate(locationName='客厅')`，随后轮询 `robot_status` 等到达（5 秒一次，最长 120 秒）
+3. 检测人：三级探测——先查 `robot_status`；无人则等 10 秒再查；仍无人则调 `robot_search_360(objId='1')` 主动环顾；还无人则整段跳过
+4. 播报欢迎语：识别到人名 →「{名字}，欢迎回家，为您打开客厅的灯」；只识别到人未返回人名 →「欢迎回家，为您打开客厅的灯」。必须等完整播完再进入下一步
+5. 开灯：`light.set('on', True)`，最多 3 次重试（间隔 2 秒）
+6. 启动人跟随：`robot_follow(mode=0, trackTarget=4)`
+7. 播报 + 播放音乐：先播报「为您播放您最喜欢的音乐」，再 `robot_play_music(text='轻音乐')`；音乐与跟随并行持续
+8. 停止时清理现场：`robot_music_control(controlType=4)` 停音乐 + `robot_move(moveId=5)` 完全停止跟随 + 关灯。用 `try/finally` 覆盖所有退出路径
 
 ### 人名三态语义
 
@@ -109,11 +109,11 @@
 
 用官方 SDK 的 streamable HTTP 客户端建立会话，`ClientSession` 必须 `async with` 进入以启动内部 dispatcher，然后 `initialize()`。
 
-> **踩坑**：SDK v2.3 不能用 `StreamableHTTPTransport(url, http_client)`；`ClientSession` 不能直接构造后调用；工具 schema 属性是 `input_schema`（非 `inputSchema`）；SDK 内部用 httpx2，别传 `timeout`。
+> 踩坑：SDK v2.3 不能用 `StreamableHTTPTransport(url, http_client)`；`ClientSession` 不能直接构造后调用；工具 schema 属性是 `input_schema`（非 `inputSchema`）；SDK 内部用 httpx2，别传 `timeout`。
 
 ### TTS 等待（speak_and_wait）
 
-实测 `robot_speak` 返回 `OK` 只代表"消息已发送"，`robot_status` 在播报期间**没有任何字段反映播放状态**（设备任务恒"空闲"、音乐"已停止"），且有约 20 秒缓存。所以只能按字数估算：
+实测 `robot_speak` 返回 `OK` 只代表"消息已发送"，`robot_status` 在播报期间没有任何字段反映播放状态（设备任务恒"空闲"、音乐"已停止"），且有约 20 秒缓存。所以只能按字数估算：
 
 ```python
 wait = max(2.0, len(text) / 4.0) + 1.5   # 4字/秒 + 缓冲
@@ -132,7 +132,7 @@ Users currently detected in the camera view (...): DAVID {"leftTopX":0.382812, "
 当前检测到人数：1
 ```
 
-也要兼容圆括号格式 `张三 (0.42, 0.31)` 和多人逗号分隔。**解析顺序关键：先去坐标，再去分隔符**——否则 JSON 坐标里的逗号会把名字切断。
+也要兼容圆括号格式 `张三 (0.42, 0.31)` 和多人逗号分隔。解析顺序关键：先去坐标，再去分隔符——否则 JSON 坐标里的逗号会把名字切断。
 
 ```python
 count = int(re.search(r'当前检测到人数[：:]\s*(\d+)', text).group(1))
@@ -175,27 +175,27 @@ light.set('on', True)
 
 ### 环境与配置
 
-- **Token 失效**：旧测试环境 Token 返回 `invalid or missing access key`（HTTP 401），改用正式环境的配置
-- **环境地图差异**：测试环境有「门口」，正式环境最初没有。写死地点名会导航失败。换环境先 `robot_list_locations` 核对，地点名必须原样传，不能猜
+- Token 失效：旧测试环境 Token 返回 `invalid or missing access key`（HTTP 401），改用正式环境的配置
+- 环境地图差异：测试环境有「门口」，正式环境最初没有。写死地点名会导航失败。换环境先 `robot_list_locations` 核对，地点名必须原样传，不能猜
 
 ### 时序与协议
 
-- **SDK API 变更**：用 `streamable_http_client`；`ClientSession` 必须 `async with`；schema 属性是 `input_schema`；不传 `timeout`
-- **TTS 返回 ≠ 播完**：接口无播放状态反馈，status 有 20s 缓存，靠状态轮询判断播完不可行，只能按字数估算等待
-- **停止跟随的正确姿势**：`robot_stop_patrol` 停不掉 AI 跟随，必须用 `robot_move(moveId=5)` 完全停止；音乐用 `robot_music_control(controlType=4)`
-- **连接关闭噪音**：短生命周期测试脚本退出时偶发 anyio `cancel scope in a different task`。判断为测试脚本生命周期问题，常驻主程序不受影响
+- SDK API 变更：用 `streamable_http_client`；`ClientSession` 必须 `async with`；schema 属性是 `input_schema`；不传 `timeout`
+- TTS 返回 ≠ 播完：接口无播放状态反馈，status 有 20s 缓存，靠状态轮询判断播完不可行，只能按字数估算等待
+- 停止跟随的正确姿势：`robot_stop_patrol` 停不掉 AI 跟随，必须用 `robot_move(moveId=5)` 完全停止；音乐用 `robot_music_control(controlType=4)`
+- 连接关闭噪音：短生命周期测试脚本退出时偶发 anyio `cancel scope in a different task`。判断为测试脚本生命周期问题，常驻主程序不受影响
 
 ### 设备与硬件
 
-- **灯泡间歇性离线**：BLE Mesh 经中枢下发偶发错误码，实测重试第 3 次成功，故做 3 次重试。日志中「网关已接收指令，无法判断是否设置成功」是正常提示，不代表失败
-- **传感器读取抖动**：偶发 base64 解密失败，主循环 try/except 跳过本轮即可，不是状态判断错误
-- **现场遗留**：迎宾结束后跟随/音乐/灯会持续，退出必须统一清理，否则机器人一直处于跟随放音乐状态
+- 灯泡间歇性离线：BLE Mesh 经中枢下发偶发错误码，实测重试第 3 次成功，故做 3 次重试。日志中「网关已接收指令，无法判断是否设置成功」是正常提示，不代表失败
+- 传感器读取抖动：偶发 base64 解密失败，主循环 try/except 跳过本轮即可，不是状态判断错误
+- 现场遗留：迎宾结束后跟随/音乐/灯会持续，退出必须统一清理，否则机器人一直处于跟随放音乐状态
 
 ### 数据与文本解析
 
-- **坐标混进人名**：真实格式是 JSON 坐标而非圆括号；必须先去花括号再去逗号分割，顺序错了就会播报乱码
-- **英文名字逐字母念**：全大写英文串被中文 TTS 当缩写，转首字母大写解决
-- **无人名分支不能用占位**：用三态语义，没人名就播不带名字的版本
+- 坐标混进人名：真实格式是 JSON 坐标而非圆括号；必须先去花括号再去逗号分割，顺序错了就会播报乱码
+- 英文名字逐字母念：全大写英文串被中文 TTS 当缩写，转首字母大写解决
+- 无人名分支不能用占位：用三态语义，没人名就播不带名字的版本
 
 ## 关键配置参数
 
@@ -223,11 +223,11 @@ uv run --python 3.11 door_welcome.py
 # 停止：删除 door_welcome.run 标志文件（或 Ctrl+C）
 ```
 
-> **触发注意**：程序启动时若门已是「开门」状态，需先关门再开门（产生 True→False 边沿）才触发。
+> 触发注意：程序启动时若门已是「开门」状态，需先关门再开门（产生 True→False 边沿）才触发。
 
-**诊断脚本**：`verify_setup.py`（只读自检）、`smoke_test.py`（全链路冒烟，支持注入假名测试三态分支）、`cleanup_test.py`（清理现场）、`probe_ebo.py`（查状态）、`probe_tts.py`（探测 TTS 期间状态）、`list_tools.py`（列出全部工具与参数 schema）。
+诊断脚本：`verify_setup.py`（只读自检）、`smoke_test.py`（全流程冒烟，支持注入假名测试三态分支）、`cleanup_test.py`（清理现场）、`probe_ebo.py`（查状态）、`probe_tts.py`（探测 TTS 期间状态）、`list_tools.py`（列出全部工具与参数 schema）。
 
-**依赖**：python-dotenv, websockets, mcp>=1.20.0, pydantic, mcp-proxy, fastmcp, mijiaAPI>=3.0.0（Python 3.11 + uv）。
+依赖：python-dotenv, websockets, mcp>=1.20.0, pydantic, mcp-proxy, fastmcp, mijiaAPI>=3.0.0（Python 3.11 + uv）。
 
 ## 遗留风险
 
@@ -235,4 +235,4 @@ uv run --python 3.11 door_welcome.py
 - 短生命周期脚本退出期偶发 anyio cancel scope 警告，常驻主程序未复现
 - 真人名字的真实返回格式已实测确认（JSON 坐标 + 全大写），解析与规范化逻辑已用真实文本样例验证
 
-> **一句话总结**：难点不在流程编排本身，而在适配真实硬件/协议的不完美——环境差异、SDK 变更、TTS 时序、脏数据格式、间歇性离线、状态残留。每一处加固都是被真机实测"打"出来的。
+> 一句话总结：难点不在流程编排本身，而在适配真实硬件/协议的不完美——环境差异、SDK 变更、TTS 时序、脏数据格式、间歇性离线、状态残留。每一处加固都是被真机实测"打"出来的。

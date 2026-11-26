@@ -1,6 +1,6 @@
 # Project 2: Smart Home Integration (Door Welcome)
 
-> Another real-world project connecting an EBO robot to Mijia devices through two MCP channels. It demonstrates two typical MCP usage patterns — **HTTP-transport robot control** and **stdio-transport local device integration** — plus how a long-running daemon handles state residue, dirty data, and imperfect hardware.
+> Connects an EBO robot to Mijia devices through two MCP channels: HTTP transport controls the robot, stdio transport integrates local devices. It also records how a long-running daemon handles stale state, dirty data, and imperfect hardware.
 
 ## Final Result
 
@@ -15,7 +15,7 @@ When a Xiaomi door/window sensor detects the door changing from closed to open:
 
 ## Design Principle
 
-**Pure Python standalone program + two MCP channels, no AI real-time orchestration** — suitable for long-term stable operation in exhibition/demo scenarios.
+Pure Python standalone program + two MCP channels, no AI real-time orchestration — suitable for long-term stable operation in exhibition/demo scenarios.
 
 This contrasts with Project 1 (scheduled automation + AI orchestration):
 - Project 1 suits "once a day, complex logic, needs LLM judgment" scenarios
@@ -49,7 +49,7 @@ Network: the EBO robot and the machine running the script are on the same LAN. T
 ```
 
 > Get the token from the "AI Linked Programming" page in the app; one per robot. The endpoint is also shown there and is not published in this tutorial.
-> Environment note: production and test endpoints differ, and **their map data differs too** — navigation location names must follow what `robot_list_locations` returns in the actual environment.
+> Environment note: production and test endpoints differ, and their map data differs too — navigation location names must follow what `robot_list_locations` returns in the actual environment.
 
 ### 2. Mijia MCP (stdio transport)
 
@@ -84,14 +84,14 @@ Uses the `mijiaAPI` library; first launch requires QR-code login, credentials ar
 
 ## Full Execution Flow (8 steps)
 
-1. **Door edge detection**: main loop polls every 3 s; triggers only when previous `contact-state=True` (closed) and current `False` (opened), and >30 s since last trigger
-2. **Navigate to living room**: `robot_navigate(locationName='Living Room')`, then poll `robot_status` for arrival (every 5 s, max 120 s)
-3. **Detect person**: three-tier probe — first `robot_status`; none → wait 10 s and check again; still none → `robot_search_360(objId='1')`; still none → skip this whole segment
-4. **Welcome broadcast**: name recognized → "[Name], welcome home, turning on the living room light for you"; person detected without a name → "Welcome home, turning on the living room light for you". **Must finish speaking completely** before the next step
-5. **Turn on light**: `light.set('on', True)`, max 3 retries (2 s apart)
-6. **Start person following**: `robot_follow(mode=0, trackTarget=4)`
-7. **Broadcast + play music**: first speak "Playing your favorite music", then `robot_play_music(text='light music')`; music and following run in parallel
-8. **Cleanup on stop**: `robot_music_control(controlType=4)` stop music + `robot_move(moveId=5)` full stop of following + turn off light. Use `try/finally` to cover all exit paths
+1. Door edge detection: main loop polls every 3 s; triggers only when previous `contact-state=True` (closed) and current `False` (opened), and >30 s since last trigger
+2. Navigate to living room: `robot_navigate(locationName='Living Room')`, then poll `robot_status` for arrival (every 5 s, max 120 s)
+3. Detect person: three-tier probe — first `robot_status`; none → wait 10 s and check again; still none → `robot_search_360(objId='1')`; still none → skip this whole segment
+4. Welcome broadcast: name recognized → "[Name], welcome home, turning on the living room light for you"; person detected without a name → "Welcome home, turning on the living room light for you". Must finish speaking completely before the next step
+5. Turn on light: `light.set('on', True)`, max 3 retries (2 s apart)
+6. Start person following: `robot_follow(mode=0, trackTarget=4)`
+7. Broadcast + play music: first speak "Playing your favorite music", then `robot_play_music(text='light music')`; music and following run in parallel
+8. Cleanup on stop: `robot_music_control(controlType=4)` stop music + `robot_move(moveId=5)` full stop of following + turn off light. Use `try/finally` to cover all exit paths
 
 ### Person Name Tri-State Semantics
 
@@ -109,11 +109,11 @@ Uses the `mijiaAPI` library; first launch requires QR-code login, credentials ar
 
 Use the official SDK's streamable HTTP client; `ClientSession` must be entered with `async with` to start its internal dispatcher, then call `initialize()`.
 
-> **Pitfall**: SDK v2.3 doesn't accept `StreamableHTTPTransport(url, http_client)`; `ClientSession` can't be constructed and called directly; the tool schema attribute is `input_schema` (not `inputSchema`); the SDK uses httpx2 internally — don't pass `timeout`.
+> Pitfall: SDK v2.3 doesn't accept `StreamableHTTPTransport(url, http_client)`; `ClientSession` can't be constructed and called directly; the tool schema attribute is `input_schema` (not `inputSchema`); the SDK uses httpx2 internally — don't pass `timeout`.
 
 ### TTS waiting (speak_and_wait)
 
-In testing, `robot_speak` returning `OK` only means "message sent"; `robot_status` has **no field reflecting playback state** (device task is always "idle", music "stopped") and has ~20 s caching. So waiting must be estimated by character count:
+In testing, `robot_speak` returning `OK` only means "message sent"; `robot_status` has no field reflecting playback state (device task is always "idle", music "stopped") and has ~20 s caching. So waiting must be estimated by character count:
 
 ```python
 wait = max(2.0, len(text) / 4.0) + 1.5   # 4 chars/sec + buffer
@@ -132,7 +132,7 @@ Users currently detected in the camera view (...): DAVID {"leftTopX":0.382812, "
 当前检测到人数：1
 ```
 
-Also handle parenthesized `David (0.42, 0.31)` and comma-separated multiple people. **Parsing order is critical: strip coordinates first, then split on separators** — otherwise commas inside the JSON coordinates cut the name apart.
+Also handle parenthesized `David (0.42, 0.31)` and comma-separated multiple people. Parsing order is critical: strip coordinates first, then split on separators — otherwise commas inside the JSON coordinates cut the name apart.
 
 ```python
 count = int(re.search(r'当前检测到人数[：:]\s*(\d+)', text).group(1))
@@ -175,27 +175,27 @@ Control the daemon with a flag file: create `door_welcome.run` with `running` at
 
 ### Environment & config
 
-- **Token expiry**: an old test-environment token returned `invalid or missing access key` (HTTP 401); switch to the production config
-- **Environment map differences**: test env has "Doorway", production initially didn't. Hardcoded location names fail navigation. Call `robot_list_locations` after switching environments; names must be passed verbatim, never guessed
+- Token expiry: an old test-environment token returned `invalid or missing access key` (HTTP 401); switch to the production config
+- Environment map differences: test env has "Doorway", production initially didn't. Hardcoded location names fail navigation. Call `robot_list_locations` after switching environments; names must be passed verbatim, never guessed
 
 ### Timing & protocol
 
-- **SDK API changes**: use `streamable_http_client`; `ClientSession` must be `async with`; schema attribute is `input_schema`; don't pass `timeout`
-- **TTS return ≠ finished speaking**: no playback-state feedback, status has 20 s caching, so polling status to detect completion doesn't work — estimate by character count
-- **Correct way to stop following**: `robot_stop_patrol` can't stop AI following; use `robot_move(moveId=5)` for a full stop; music uses `robot_music_control(controlType=4)`
-- **Connection-close noise**: short-lived test scripts occasionally throw anyio `cancel scope in a different task` on exit — judged a test-script lifecycle issue; the resident main program is unaffected
+- SDK API changes: use `streamable_http_client`; `ClientSession` must be `async with`; schema attribute is `input_schema`; don't pass `timeout`
+- TTS return ≠ finished speaking: no playback-state feedback, status has 20 s caching, so polling status to detect completion doesn't work — estimate by character count
+- Correct way to stop following: `robot_stop_patrol` can't stop AI following; use `robot_move(moveId=5)` for a full stop; music uses `robot_music_control(controlType=4)`
+- Connection-close noise: short-lived test scripts occasionally throw anyio `cancel scope in a different task` on exit — judged a test-script lifecycle issue; the resident main program is unaffected
 
 ### Device & hardware
 
-- **Light intermittently offline**: BLE Mesh delivery via hub occasionally returns an error code; the 3rd retry succeeded in testing, hence 3 retries. The log line "gateway received command, cannot determine whether set succeeded" is a normal notice, not a failure
-- **Sensor read jitter**: occasional base64 decode failures; skip the round with try/except in the main loop — not a state-judgment error
-- **Scene residue**: after welcoming, following/music/light persist; cleanup on exit is mandatory or the robot stays in follow+music state
+- Light intermittently offline: BLE Mesh delivery via hub occasionally returns an error code; the 3rd retry succeeded in testing, hence 3 retries. The log line "gateway received command, cannot determine whether set succeeded" is a normal notice, not a failure
+- Sensor read jitter: occasional base64 decode failures; skip the round with try/except in the main loop — not a state-judgment error
+- Scene residue: after welcoming, following/music/light persist; cleanup on exit is mandatory or the robot stays in follow+music state
 
 ### Data & text parsing
 
-- **Coordinates mixed into names**: the real format is JSON coordinates, not parentheses; strip braces before splitting on commas, or the broadcast becomes garbled
-- **English names read letter-by-letter**: all-caps strings treated as abbreviations by Chinese TTS; title-case conversion fixes it
-- **No-name branch can't use a placeholder**: use tri-state semantics; broadcast the unnamed version when there's no name
+- Coordinates mixed into names: the real format is JSON coordinates, not parentheses; strip braces before splitting on commas, or the broadcast becomes garbled
+- English names read letter-by-letter: all-caps strings treated as abbreviations by Chinese TTS; title-case conversion fixes it
+- No-name branch can't use a placeholder: use tri-state semantics; broadcast the unnamed version when there's no name
 
 ## Key Config Parameters
 
@@ -223,11 +223,11 @@ uv run --python 3.11 door_welcome.py
 # Stop: delete the door_welcome.run flag file (or Ctrl+C)
 ```
 
-> **Trigger note**: if the door is already open when the program starts, close then open it (producing a True→False edge) to trigger.
+> Trigger note: if the door is already open when the program starts, close then open it (producing a True→False edge) to trigger.
 
-**Diagnostic scripts**: `verify_setup.py` (read-only self-check), `smoke_test.py` (full-flow smoke test with injectable fake names for tri-state branches), `cleanup_test.py` (clean scene), `probe_ebo.py` (query status), `probe_tts.py` (probe status during TTS), `list_tools.py` (list all tools and parameter schemas).
+Diagnostic scripts: `verify_setup.py` (read-only self-check), `smoke_test.py` (full-flow smoke test with injectable fake names for tri-state branches), `cleanup_test.py` (clean scene), `probe_ebo.py` (query status), `probe_tts.py` (probe status during TTS), `list_tools.py` (list all tools and parameter schemas).
 
-**Dependencies**: python-dotenv, websockets, mcp>=1.20.0, pydantic, mcp-proxy, fastmcp, mijiaAPI>=3.0.0 (Python 3.11 + uv).
+Dependencies: python-dotenv, websockets, mcp>=1.20.0, pydantic, mcp-proxy, fastmcp, mijiaAPI>=3.0.0 (Python 3.11 + uv).
 
 ## Residual Risks
 
@@ -235,4 +235,4 @@ uv run --python 3.11 door_welcome.py
 - Short-lived scripts occasionally emit anyio cancel-scope warnings on exit; the resident main program hasn't reproduced it
 - The real person-name format has been confirmed by testing (JSON coordinates + all-caps); parsing and normalization logic validated with real text samples
 
-> **In one sentence**: the difficulty isn't flow orchestration itself, but adapting to the imperfection of real hardware/protocols — environment differences, SDK changes, TTS timing, dirty data formats, intermittent offline, state residue. Every hardening was beaten out by real-device testing.
+> In one sentence: the difficulty isn't flow orchestration itself, but adapting to the imperfection of real hardware/protocols — environment differences, SDK changes, TTS timing, dirty data formats, intermittent offline, state residue. Every hardening was beaten out by real-device testing.
