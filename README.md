@@ -6,6 +6,8 @@
 
 > **5 分钟目标**：连接机器人 → 拿到状态 → 发出第一条指令。跟着[快速开始](docs/zh-CN/02-quickstart.md)走，并用[自检脚本](examples/00-connection-check/README.md)确认真的连通。
 
+> **完全零基础？** 不用懂技术、不用读文档。复制一段提示词粘贴给 AI 助手，它会一步步带你连机器人、看画面、做出三个项目——从[零基础提示词](docs/zh-CN/00-copy-paste-prompts.md)开始。
+
 ![MCP 服务连接成功，15/15 工具已启用](assets/mcp-connected-CN.png)
 
 ## 支持机型
@@ -33,6 +35,8 @@
 - 中文（当前）
 
 ## 学习路径
+
+> **如果你完全没接触过 MCP，先读 [零基础：复制一段提示词，让 AI 带你做](docs/zh-CN/00-copy-paste-prompts.md)**。它会让 AI 助手带你完成连接、音视频和三个项目，你不用自己动手改配置。下面的路径适合想理解原理、自己动手的人。
 
 ### ① 入门
 
@@ -65,7 +69,8 @@
 mcp-tutorials/
 ├── README.md / README_EN.md      # 中英入口 + 学习路径
 ├── docs/
-│   ├── zh-CN/ / en-US/           # 各 11 篇，独立成文
+│   ├── zh-CN/ / en-US/           # 各 12 篇，独立成文
+│   │   ├── 00-copy-paste-prompts # 零基础：复制提示词让 AI 带你做
 │   │   ├── 01~04                 # 基础概念与控制示例
 │   │   ├── ebo-mcp-*             # 入门 / 工具 / 排错 / 提示词
 │   │   └── project-01/02/03      # 三个实战项目

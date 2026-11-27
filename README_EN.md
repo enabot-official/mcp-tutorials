@@ -6,6 +6,8 @@ Let an AI Agent control an Enabot EBO robot in plain language — from your firs
 
 > **5-minute goal**: connect the robot → read its status → send your first command. Follow the [quickstart](docs/en-US/02-quickstart.md) and use the [self-check script](examples/00-connection-check/README_EN.md) to confirm real connectivity.
 
+> **Absolute beginner?** No tech knowledge or docs needed. Copy a prompt into your AI assistant and it will walk you through connecting the robot, viewing video, and building all three projects — start with [copy-paste prompts](docs/en-US/00-copy-paste-prompts.md).
+
 ![MCP connected, 15/15 tools enabled](assets/mcp-connected-EN.png)
 
 ## Supported Models
@@ -33,6 +35,8 @@ Code lives in [examples/](examples/README.md): a connectivity check, a minimal c
 - English (current)
 
 ## Learning Path
+
+> **If you've never used MCP, start with [Absolute beginner: copy one prompt, let the AI walk you through it](docs/en-US/00-copy-paste-prompts.md)**. It lets your AI assistant handle connecting, audio/video, and all three projects — you don't edit config yourself. Follow the path below if you want to understand the details and do it yourself.
 
 ### ① Getting Started
 
@@ -65,7 +69,8 @@ Code lives in [examples/](examples/README.md): a connectivity check, a minimal c
 mcp-tutorials/
 ├── README.md / README_EN.md      # Chinese / English entry + learning path
 ├── docs/
-│   ├── zh-CN/ / en-US/           # 11 articles each, standalone
+│   ├── zh-CN/ / en-US/           # 12 articles each, standalone
+│   │   ├── 00-copy-paste-prompts # absolute beginner: copy prompts, let AI guide you
 │   │   ├── 01~04                 # basics and control demo
 │   │   ├── ebo-mcp-*             # getting started / tools / troubleshooting / prompts
 │   │   └── project-01/02/03      # three real-world projects
