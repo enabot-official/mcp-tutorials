@@ -6,6 +6,8 @@ EBO robots now support MCP (the AI control interface). Simply put, you can use a
 
 For example, say "go check the living room" to your AI, and it will automatically move the robot to the living room and send you a photo.
 
+> This guide assumes you are already comfortable using an AI Agent — you know how to talk to it and assign it tasks. The exact steps below vary with the Agent you choose and the model it calls (config entry points, prompt wording, and response formats all differ), but the underlying approach is the same: configure the MCP connection → let the Agent discover the tools → call them in plain language. Once you understand the approach, you can follow it with a different Agent too.
+
 ## What you'll need
 
 - An EBO robot. Only the EBO MAX and EBO Air2 Plus support MCP at present; other models are not supported yet. This guide and the companion projects were all tested on the EBO MAX.
@@ -15,10 +17,10 @@ For example, say "go check the living room" to your AI, and it will automaticall
 ## Step 1: Get your MCP token
 
 1. Open the "Yibao Robot" app and go to your robot's settings page
-2. Find AI Linked Programming (AI 联动编程) and tap it
+2. Find MCP Interface Access and tap it
 3. You'll see an MCP token — copy and store it safely; you'll need it later
 
-![AI Linked Programming page in the Yibao Robot app (address and token redacted)](../../assets/token-app-EN.png)
+![MCP Interface Access page in the Yibao Robot app (address and token redacted)](../../assets/token-app-EN.png)
 
 > Note: the token expires — and keep it private
 > - Tokens are valid for one month. If the AI can't connect later, just tap Renew in the app.
@@ -48,7 +50,7 @@ This guide and all three companion projects were built with WorkBuddy, so the co
 1. Open WorkBuddy's MCP config file at `~/.workbuddy/mcp.json` (create it if it doesn't exist)
 2. Add the following to the config file, replacing two placeholders:
    - `<YOUR_TOKEN>`: the token you copied from the app
-   - `<EBO_MAX_MCP_ENDPOINT>` / `<EBO_PLUS_MCP_ENDPOINT>`: the MCP endpoint for your robot. Check the AI Linked Programming page in the "Yibao Robot" app or ask official support for the address. This tutorial does not publish the concrete endpoints.
+   - `<EBO_MAX_MCP_ENDPOINT>` / `<EBO_PLUS_MCP_ENDPOINT>`: the MCP endpoint for your robot. Check the MCP Interface Access page in the "Yibao Robot" app or ask official support for the address. This tutorial does not publish the concrete endpoints.
 
 Both models use `ebo-robot` as the server name, matching what the companion code reads. Only the endpoint differs.
 

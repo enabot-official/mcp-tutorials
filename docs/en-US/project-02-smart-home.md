@@ -48,7 +48,7 @@ Network: the EBO robot and the machine running the script are on the same LAN. T
 }
 ```
 
-> Get the token from the "AI Linked Programming" page in the app; one per robot. The endpoint is also shown there and is not published in this tutorial.
+> Get the token from the "MCP Interface Access" page in the app; one per robot. The endpoint is also shown there and is not published in this tutorial.
 > Environment note: production and test endpoints differ, and their map data differs too — navigation location names must follow what `robot_list_locations` returns in the actual environment.
 
 ### 2. Mijia MCP (stdio transport)

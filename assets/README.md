@@ -8,7 +8,7 @@
 
 | 文件 | 内容 | 引用位置 |
 | --- | --- | --- |
-| `token-app-CN.png` / `token-app-EN.png` | APP 的 AI 联动编程页：MCP 服务开关、连接凭证（地址与令牌已脱敏） | 入门教程·第一步 |
+| `token-app-CN.png` / `token-app-EN.png` | APP 的 MCP接口开放页：MCP 服务开关、连接凭证（地址与令牌已脱敏） | 入门教程·第一步 |
 | `mcp-connected-CN.png` / `mcp-connected-EN.png` | AI 客户端的 MCP 服务管理界面，15/15 工具已启用 | 入门教程·第三步 |
 | `map-locations-CN.jpg` / `map-locations-EN.jpg` | APP 导航地点列表（门口、客厅），视频画面已像素化 | 排错·导航找不到位置 |
 | `rtsp-lan-CN.png` / `rtsp-lan-EN.png` | APP 的 RTSP 局域网地址开关（IP 已脱敏） | 排错·音视频能力边界 |

@@ -12,9 +12,9 @@ This is the condensed version of the [full Getting Started guide](ebo-mcp-gettin
 
 ### 1. Get the token
 
-Open the "Yibao Robot" app → robot settings → "AI Linked Programming", copy the MCP token, and note the MCP endpoint shown on the page.
+Open the "Yibao Robot" app → robot settings → "MCP Interface Access", copy the MCP token, and note the MCP endpoint shown on the page.
 
-![AI Linked Programming page in the app (address and token redacted)](../../assets/token-app-EN.png)
+![MCP Interface Access page in the app (address and token redacted)](../../assets/token-app-EN.png)
 
 > Tokens are valid for one month and effectively grant robot control — don't paste them into public channels. Renew in the app when expired; "Regenerate" invalidates all old tokens.
 
