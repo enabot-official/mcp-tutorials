@@ -30,6 +30,8 @@ For our scenario, this means: once the EBO robot provides an MCP interface, any 
 - Client: the protocol component inside the Host, managing the connection and message exchange with the Server
 - Server: exposes an external system's capabilities per the MCP spec. EBO's Server exposes 15 tools (see [Tool Reference](ebo-mcp-tools-reference.md))
 
+One point worth making clear: the Agent that understands commands is effectively the robot's "brain", and it runs continuously on an external device — a computer or server. The robot itself handles only basic actions: reporting status, executing patrols, playing sound on command, moving, and capturing media. It does no understanding or reasoning locally. All three projects in this repo therefore need an always-on external device to host the Agent; the robot cannot complete a task like voice conversation on its own.
+
 Common transports:
 - HTTP / streamable HTTP: used by the EBO robot; over the network, configured with a URL + token ([Getting Started](ebo-mcp-getting-started.md))
 - stdio: local process communication, used for Mijia device integration ([Project 2](project-02-smart-home.md))
@@ -45,6 +47,7 @@ Cannot (important, to avoid misunderstandings):
 - MCP itself provides no "reasoning" — it just hands tools to the AI; combining tools is the AI's job
 - It doesn't guarantee physical execution — an OK return only means "sent"; verify with state queries ([Troubleshooting](ebo-mcp-troubleshooting.md))
 - It isn't real-time A/V streaming — EBO's MCP only makes the robot "speak"; live video uses the RTSP LAN stream
+- It isn't a fall-detection alert channel — the Air2 Plus does not support fall detection; the MAX has the hardware capability but has not exposed it to MCP yet. Opening it up is under evaluation; timing is pending alignment with the R&D team
 
 ## How it differs from other approaches
 

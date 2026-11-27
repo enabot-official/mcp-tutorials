@@ -130,6 +130,8 @@ Make the robot announce text aloud via TTS.
 | --- | --- | --- | --- |
 | `text` | string | Yes | Exact text to speak. Keep it short and natural; avoid personal pronouns |
 
+The built-in TTS language list includes Danish and other languages; select one with a BCP-47 tag (e.g. `da-DK`). This is text-to-speech using the robot's own voice — MCP has no tool to play an external audio file or a custom voice. Playing a voice you generated requires a different, device-local channel.
+
 ### `robot_set_volume`
 
 Adjust the speaker volume: set an exact level, or step up/down.

@@ -15,6 +15,14 @@
 
 The cause was not in the code: during testing, a TV or video nearby played continuously and drowned out the user's voice, so the wake word was never recognized. After the video was turned off, wake-up succeeded twice. Check the environment before changing code.
 
+### Expectations and model choice
+
+What this section demonstrates is technical feasibility, not a polished voice assistant. Wake-word accuracy is still limited and reply latency is noticeable. Official development will continue, but a mature product-level experience is not guaranteed. MCP's current purpose is to let users explore custom ideas, and this project should be evaluated with that in mind.
+
+For a voice-companion application, we recommend the EBO MAX: its four-microphone array picks up sound noticeably better than the Air2 Plus's single microphone, and the Air2 Plus does not support music playback either. Hardware is identical internationally — the European version matches the domestic one. The built-in TTS language list includes Danish, so non-Chinese announcements are covered; the voice is the robot's own, and MCP has no interface for playing a custom voice.
+
+For fall detection: the Air2 Plus does not support it. The MAX has the hardware capability but has not exposed it to MCP yet; whether and when to open it up is under evaluation with the R&D team.
+
 ## Design Principle
 
 The script only handles listening and speaking; the WorkBuddy Agent understands commands. The two exchange messages through two JSON files, so no LLM API key is needed.

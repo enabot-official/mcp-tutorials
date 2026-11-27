@@ -139,11 +139,14 @@ Return to charging
 | Item | EBO MAX (Standard) | EBO Air2 Plus |
 | --- | --- | --- |
 | Number of features | All 15 features | 11 core features |
+| Microphone | Four-microphone array, better pickup | Single microphone, weaker pickup than MAX |
 | Camera | 2560 × 1440 | 2880 × 1620 (clearer) |
 | Whole-home patrol | Supported | Not supported |
 | 360-degree search | Supported | Not supported |
 | Music playback | Supported | Not supported |
 | Shared features | Movement, navigation, photo, video, follow, voice, volume, auto-charge (identical experience) | Same as left |
+
+Hardware is identical between units sold in mainland China and overseas — the European version is the same as the domestic one. For voice-interaction use cases, prefer the MAX: its four-microphone array picks up sound noticeably better than the Air2 Plus's single microphone.
 
 ## FAQ
 
@@ -170,3 +173,19 @@ A: Currently MCP only supports making the robot "speak" (text-to-speech); it doe
 Q: Is it safe to send my token to an Agent to configure things?
 
 A: The token is effectively control of your robot, and sending it to an Agent means that Agent can read it. A safer approach is to fill the token into your local `~/.workbuddy/mcp.json` yourself and let the Agent only generate the config content, never touch the real credential. Do not send tokens to untrusted third-party services or post them publicly. In either case, never put the token in code or commit it to a repository.
+
+Q: Which languages does TTS support?
+
+A: The built-in TTS language list includes Danish. Pass a BCP-47 language tag (e.g. `da-DK`) when calling `robot_speak`. Note this is the robot's own voice reading text aloud — MCP has no tool to play an audio file or a custom voice you generated.
+
+Q: Does voice conversation always need an external device?
+
+A: Yes. In the current architecture the Agent that understands your commands is the robot's "brain", and it must run continuously on a computer or server. The robot itself handles only basic actions: reporting status, executing patrols, playing sound on command. It does no understanding or reasoning on its own. This is why the voice loop in [Project 3](project-03-voice-assistant.md) needs a local always-on script.
+
+Q: Can I receive fall-detection alerts?
+
+A: Not through MCP. The Air2 Plus does not support fall detection. The MAX has the hardware capability but it has not been exposed to MCP yet. We can evaluate opening it up; timing still needs to be aligned with the R&D team.
+
+Q: Which model suits a voice-companion application?
+
+A: We recommend the EBO MAX: its four-microphone array picks up sound better, and it supports music playback (the Air2 Plus does not). Hardware is identical internationally — the European version matches the domestic one. One caveat: MCP's current purpose is to let users explore custom ideas; custom voice conversation is still at the technical-feasibility stage, with limited wake-word accuracy and noticeable latency. We will keep improving it, but cannot promise it will reach a polished product experience.

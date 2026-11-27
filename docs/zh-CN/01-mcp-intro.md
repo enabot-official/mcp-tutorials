@@ -32,6 +32,8 @@ MCP（Model Context Protocol，模型上下文协议）就是为解决这个 N×
 - Client（客户端）：Host 内部的协议组件，负责与 Server 建立连接、收发消息
 - Server（服务端）：把外部系统的能力按 MCP 规范暴露出来。EBO 的 Server 暴露了 15 个工具（见[工具参考](ebo-mcp-tools-reference.md)）
 
+需要明确一点：理解指令的 Agent 相当于机器人的「大脑」，它持续运行在一台外部设备（电脑或服务器）上。机器人本地只做基本动作——上报状态、执行巡逻、按指令播放声音、移动和拍摄等，本身不做理解和推理。因此本库的三个项目都需要一台常开的外部设备来承载 Agent，机器人不能脱离它独立完成语音对话这类任务。
+
 传输方式常见的有两种：
 - HTTP / streamable HTTP：EBO 机器人用这种，走网络，配置一个 URL + Token 即可（[实战一、入门教程](ebo-mcp-getting-started.md)）
 - stdio：本地进程通信，米家设备集成用这种（[实战二](project-02-smart-home.md)）
@@ -47,6 +49,7 @@ MCP（Model Context Protocol，模型上下文协议）就是为解决这个 N×
 - MCP 本身不提供"推理能力"，它只是把工具交给 AI；怎么组合工具是 AI 的事
 - 不保证物理执行成功——下发命令返回 OK 只代表"消息送出"，要靠状态查询复核（见[排错文档](ebo-mcp-troubleshooting.md)）
 - 不等于实时音视频回传——EBO 的 MCP 只支持让机器人"说"，实时画面要走 RTSP 局域网流
+- 不等于跌倒检测告警——Air2 Plus 不支持跌倒检测；MAX 有这个硬件能力，但目前未开放到 MCP，后续会评估开放，时间待与研发确认
 
 ## 与其他方案的区别
 
